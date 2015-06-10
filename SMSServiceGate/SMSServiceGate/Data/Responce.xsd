@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="sms" minOccurs ="1">
+          <xs:complexType>
+            <xs:attribute name="num_message" type="xs:unsignedInt" use="required" />
+            <xs:attribute name="id" type="xs:string" use="required" />
+            <xs:attribute name="parts" type="xs:unsignedInt" use="required" />
+            <xs:attribute name="part_no" type="xs:unsignedInt" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="method" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

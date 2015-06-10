@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Csharper.SenderServiceFacade.ADEService" CodeBehind="ADEService.svc.cs" %>

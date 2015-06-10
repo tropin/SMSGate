@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="569241a7-b945-4796-90b6-e628982c289a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:7049/ADEService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ADEService.disco" MetadataType="Disco" ID="00276d2f-6f65-4145-9115-504ff47c5a69" SourceId="1" SourceUrl="http://localhost:7049/ADEService.svc?disco" />
+    <MetadataFile FileName="ADEService.wsdl" MetadataType="Wsdl" ID="f715c962-0bee-4c28-b08a-5286d8a2cd4e" SourceId="1" SourceUrl="http://localhost:7049/ADEService.svc?wsdl" />
+    <MetadataFile FileName="ADEService.xsd" MetadataType="Schema" ID="9313e49b-480f-46eb-9de9-a82a3bc15473" SourceId="1" SourceUrl="http://localhost:7049/ADEService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ADEService1.xsd" MetadataType="Schema" ID="685560da-ff45-4d00-9e40-c16a3eee78d5" SourceId="1" SourceUrl="http://localhost:7049/ADEService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ADEService2.xsd" MetadataType="Schema" ID="439d8077-72fe-4bcd-941c-bb5774459137" SourceId="1" SourceUrl="http://localhost:7049/ADEService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ADEService3.xsd" MetadataType="Schema" ID="8a6455ee-f139-4a3c-bf4b-e82b17fa96a7" SourceId="1" SourceUrl="http://localhost:7049/ADEService.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

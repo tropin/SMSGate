@@ -1,0 +1,172 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+    <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="<%= Url.Content("~/Content/jquery-ui-1.8.5.custom.css")%>" rel="stylesheet" type="text/css" />
+    <script src="<%= Url.Content("~/Scripts/jquery-1.4.4.min.js")%>" type="text/javascript"></script>
+    <script src="<%= Url.Content("~/Scripts/MicrosoftAjax.js")%>" type="text/javascript"></script>
+    <script src="<%= Url.Content("~/Scripts/MicrosoftMvcAjax.js")%>" type="text/javascript"></script>
+    <script src="<%= Url.Content("~/Scripts/jquery-ui-1.8.5.custom.min.js")%>" type="text/javascript"></script>
+    <script src="<%= Url.Content("~/Scripts/jquery-datepicker.js")%>" type="text/javascript"></script>
+    <script src="<%= Url.Content("~/Scripts/jquery.ui.datepicker-ru.js")%>" type="text/javascript"></script>
+    <!--<script src="../../Scripts/jquery-1.4.4.min.js" />-->
+</head>
+
+<script language="javascript">
+    function ExtendPopups() {
+        $('span[popuplink]').each(function () {
+            var $link = $(this);
+            var $edit = $('<span></span>');
+            $link.after($edit);
+            $edit.attr('class', $link.attr('linkclass') + " popupButton");
+            $edit.attr('title', $link.attr('wndtitle'));
+            var $container = $('<div></div>');
+            var $dialog = $container
+			    .dialog({
+			        autoOpen: false,
+			        title: $link.attr('wndtitle'),
+			        width: $link.attr('popwidth') == null ? 400 : parseInt($link.attr('popwidth')),
+			        height: $link.attr('popheight') == null ? 300 : parseInt('popheight')
+			    });
+            $edit.click(function () {
+                $container.html("<div style='text-align:center; color:black; font-size: large; '>Загружаюсь...<div>")
+                    .children('div')
+                    .first()
+                    .animate({ color: "red" }, 5000);
+                $container.load($link.attr('popuplink'), function () { ExtendAjaxLinks($container); });
+                $dialog.dialog('open');
+                return false;
+            });
+        });
+    }
+
+    function ExtendAjaxLinks(obj) {
+        var $rootContainer;
+        if (obj.get_updateTarget) {
+            $rootContainer = $(obj.get_updateTarget())
+        }
+        else {
+            $rootContainer = obj.children('div[id]');
+        }
+        $rootContainer.find('a[href]').each
+        (
+            function () {
+                $link = $(this);
+                $link.attr('href', $link.attr('href').replace(/\&X-Requested-With=.*(\&|$)/g, ""));
+                $link.click(
+                    function (event) {
+                        Sys.Mvc.AsyncHyperlink.handleClick(this, new Sys.UI.DomEvent(event), { insertionMode: Sys.Mvc.InsertionMode.replace, updateTargetId: $rootContainer.attr('id'), httpMethod: 'GET', onSuccess: Function.createDelegate(this, ExtendAjaxLinks) });
+                        return false;
+                    });
+            }
+        )
+    }
+
+    $(document).ready(ExtendPopups);
+
+    function SuccessClosePopup(obj) {
+        var $content = $(obj.get_updateTarget())
+        if ($content.has('#sucсess').length > 0) {
+            $content.closest('.ui-dialog-content').dialog('close');
+        }
+    }
+
+    $(function () {
+                    $(".datePicker").datepicker({ showOn: 'both', buttonImage: "<%= Url.Content("~/Content/Images/calendar.jpeg")%>", regional: "ru" });
+                  }
+    );
+
+</script>
+<script runat="server">
+    private Csharper.OliverTwist.Model.SessionAcessor _sAcc = null;
+
+    public Csharper.OliverTwist.Model.SessionAcessor SessionAccessor
+    {
+        get
+        {
+            if (_sAcc == null)
+                _sAcc = Csharper.OliverTwist.Model.SessionAcessor.GetAcessor();
+            return _sAcc;
+        }
+    }
+
+    public Csharper.OliverTwist.Model.ClientModel OperationalClient
+    {
+        get
+        {
+            return SessionAccessor.OperationalClient;
+        }
+    }
+
+    public bool IsLoggedOn
+    {
+        get
+        {
+            return Request.IsAuthenticated &&
+                   OperationalClient != null;
+        }
+    }
+    
+    public bool IsDealler
+    {        
+        get
+        {
+            return
+                IsLoggedOn &&
+                OperationalClient.IsDealler.HasValue &&
+                OperationalClient.IsDealler.Value;
+        }
+    }
+    
+</script>
+<body>
+    <div class="page">
+
+        <div id="header">
+            <div id="title">
+                <h1>АДЕ СМС - Доставка Ваших сообщений здесь и сейчас</h1>
+            </div>
+              
+            <div id="logindisplay">
+                <% Html.RenderPartial("LogOnUserControl"); %>
+            </div> 
+            
+            <div id="menucontainer">
+                <ul id="menu">              
+                    <li><%: Html.ActionLink("Главная", "Index", "Home")%></li>
+                    <li><%: Html.ActionLink("О компании", "About", "Home")%></li>
+                    <%
+                        if (IsDealler)
+                        {
+                    %>
+                             <li><%: Html.ActionLink("Клиенты", "Index", "Clients")%></li>
+                    <%
+                        }
+                    %>
+                    <%
+                        if (IsLoggedOn)
+                        {
+                    %>
+                             <li><%: Html.ActionLink("Пользователи", "Index", "UserProfile")%></li>
+                             <li><%: Html.ActionLink("Адресная книга", "Index", "Addresses")%></li>
+                             <li><%: Html.ActionLink("Статистика", "Index", "Statistics")%></li>
+                    <%
+                        }
+                    %>
+                </ul>
+            
+            </div>
+        </div>
+
+        <div id="main">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+
+            <div id="footer">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

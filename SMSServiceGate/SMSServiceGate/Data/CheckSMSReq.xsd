@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="request">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="login" type="xs:string" />
+        <xs:element name="pwd" type="xs:string" />
+        <xs:element maxOccurs="unbounded" minOccurs ="1" name="sms_id" type="xs:string" />
+      </xs:sequence>
+      <xs:attribute name="method" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

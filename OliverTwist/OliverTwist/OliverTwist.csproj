@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B6C3A6BA-8E3E-4C3C-A769-BFEB31E97521}</ProjectGuid>
+    <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Csharper.OliverTwist</RootNamespace>
+    <AssemblyName>Csharper.OliverTwist</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcContrib, Version=2.0.36.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\MvcContrib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClientAccountsController.cs" />
+    <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\AddressesController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
+    <Compile Include="Controllers\UserProfileController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="CostCalculator.cs" />
+    <Compile Include="FilterContainers\AccountHistoryFilterContainer.cs" />
+    <Compile Include="FilterContainers\CitiesDropdown.cs" />
+    <Compile Include="FilterContainers\ClientsFilterContainer.cs" />
+    <Compile Include="FilterContainers\AddressFilterContainer.cs" />
+    <Compile Include="FilterContainers\StatisticsFilterContainer.cs" />
+    <Compile Include="FilterContainers\UserChildLevelDropdown.cs" />
+    <Compile Include="FilterContainers\RolesDropdown.cs" />
+    <Compile Include="FilterContainers\UserProfilesFilterContainer.cs" />
+    <Compile Include="FilterContainers\OptionsHolder.cs" />
+    <Compile Include="FilterContainers\TimeZonesDropdown.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="MailGenerator\MailGenerator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\GateService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceRepo\StatisticsRepo.cs" />
+    <Compile Include="Services\ADEService.svc.cs">
+      <DependentUpon>ADEService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Services\GatewayCallback.svc.cs">
+      <DependentUpon>GatewayCallback.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Services\IADEService.cs" />
+    <Compile Include="Services\ServiceSession.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Images\calendar.jpeg" />
+    <Content Include="Content\Images\Drops.png" />
+    <Content Include="Content\Images\EditAccount.png" />
+    <Content Include="Content\Images\history.png" />
+    <Content Include="Content\Images\NeutralButton.jpg" />
+    <Content Include="Content\Images\no.png" />
+    <Content Include="Content\Images\null.png" />
+    <Content Include="Content\Images\Sent.png" />
+    <Content Include="Content\Images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Content\Images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Content\Images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Content\Images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Content\Images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Content\Images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\Images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Content\Images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Content\Images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Content\Images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\Images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Content\Images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Content\Images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Content\Images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\Images\yes.png" />
+    <Content Include="Content\jquery-ui-1.8.5.custom.css" />
+    <Content Include="Content\jstree_themes\apple\bg.jpg" />
+    <Content Include="Content\jstree_themes\apple\d.png" />
+    <Content Include="Content\jstree_themes\apple\dot_for_ie.gif" />
+    <Content Include="Content\jstree_themes\apple\style.css" />
+    <Content Include="Content\jstree_themes\apple\throbber.gif" />
+    <Content Include="Content\jstree_themes\classic\d.png" />
+    <Content Include="Content\jstree_themes\classic\dot_for_ie.gif" />
+    <Content Include="Content\jstree_themes\classic\style.css" />
+    <Content Include="Content\jstree_themes\classic\throbber.gif" />
+    <Content Include="Content\jstree_themes\default-rtl\d.gif" />
+    <Content Include="Content\jstree_themes\default-rtl\d.png" />
+    <Content Include="Content\jstree_themes\default-rtl\dots.gif" />
+    <Content Include="Content\jstree_themes\default-rtl\style.css" />
+    <Content Include="Content\jstree_themes\default-rtl\throbber.gif" />
+    <Content Include="Content\jstree_themes\default\d.gif" />
+    <Content Include="Content\jstree_themes\default\d.png" />
+    <Content Include="Content\jstree_themes\default\style.css" />
+    <Content Include="Content\jstree_themes\default\throbber.gif" />
+    <Content Include="Content\pop.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.4.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.5.custom.min.js" />
+    <Content Include="Scripts\jquery.jstree.js" />
+    <Content Include="Scripts\jquery.pop.js" />
+    <None Include="Properties\DataSources\Csharper.Common.SMSCheckItem.datasource" />
+    <None Include="Properties\DataSources\Csharper.Common.SMSCounter.datasource" />
+    <None Include="Properties\DataSources\Csharper.Common.SMSDetail.datasource" />
+    <None Include="Properties\DataSources\Csharper.Common.SMSSeriesId.datasource" />
+    <None Include="Service References\GateService\ADEService.disco" />
+    <None Include="Service References\GateService\configuration91.svcinfo" />
+    <None Include="Service References\GateService\configuration.svcinfo" />
+    <None Include="Service References\GateService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Scripts\jquery.ui.datepicker-ru.js" />
+    <Content Include="Scripts\jquery.ui.datepicker.js" />
+    <Content Include="Services\ADEService.svc" />
+    <Content Include="Services\GatewayCallback.svc" />
+    <Content Include="Views\ClientAccounts\AccountHistory.ascx" />
+    <Content Include="Views\ClientAccounts\AccountHistorySearchFilter.ascx" />
+    <Content Include="Views\ClientAccounts\ChangeClientAccount.ascx" />
+    <Content Include="Views\ClientAccounts\AccountHistoryWithPaging.ascx" />
+    <Content Include="Views\ClientAccounts\AccountHistoryIndex.ascx" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.ascx" />
+    <Content Include="Views\Shared\EditorTemplates\CostRanges.ascx" />
+    <Content Include="Views\Clients\ClientSearchFilter.ascx" />
+    <Content Include="Views\Clients\Details.aspx" />
+    <Content Include="Views\Clients\Index.aspx" />
+    <Content Include="Views\Clients\CreateNew.aspx" />
+    <Content Include="Views\Clients\SearchResults.ascx" />
+    <Content Include="Views\Clients\SearchResultsWithPaging.ascx" />
+    <Content Include="Views\Addresses\AddressSearchFilter.ascx" />
+    <Content Include="Views\Addresses\Details.aspx" />
+    <Content Include="Views\Addresses\Index.aspx" />
+    <Content Include="Views\Addresses\SearchResults.ascx" />
+    <Content Include="Views\Addresses\SearchResultsWithPaging.ascx" />
+    <Content Include="Views\InputBuilderTemplates\Array.aspx" />
+    <Content Include="Views\InputBuilderTemplates\ArrayAddButton.aspx" />
+    <Content Include="Views\InputBuilderTemplates\ArrayRemoveButton.aspx" />
+    <Content Include="Views\InputBuilderTemplates\Boolean.aspx" />
+    <Content Include="Views\InputBuilderTemplates\DateTime.aspx" />
+    <Content Include="Views\InputBuilderTemplates\DisplayInline.aspx" />
+    <Content Include="Views\InputBuilderTemplates\DisplayLabel.aspx" />
+    <Content Include="Views\InputBuilderTemplates\DisplayParagraph.aspx" />
+    <Content Include="Views\InputBuilderTemplates\Enum.aspx" />
+    <Content Include="Views\InputBuilderTemplates\Form.aspx" />
+    <Content Include="Views\InputBuilderTemplates\Guid.aspx" />
+    <Content Include="Views\InputBuilderTemplates\Int32.aspx" />
+    <Content Include="Views\InputBuilderTemplates\MultilineText.aspx" />
+    <Content Include="Views\InputBuilderTemplates\RadioButtons.aspx" />
+    <Content Include="Views\InputBuilderTemplates\ReadOnly.aspx" />
+    <Content Include="Views\InputBuilderTemplates\String.aspx" />
+    <Content Include="Views\InputBuilderTemplates\Submit.aspx" />
+    <Content Include="Views\Shared\DisplayTemplates\Boolean.ascx" />
+    <Content Include="Views\Shared\DisplayTemplates\Enum.ascx" />
+    <Content Include="Views\Shared\DisplayTemplates\TimeZone.ascx" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean.ascx" />
+    <Content Include="Views\Shared\EditorTemplates\City.ascx" />
+    <Content Include="Views\Shared\EditorTemplates\UserChildLevel.ascx" />
+    <Content Include="Views\Shared\EditorTemplates\Roles.ascx" />
+    <Content Include="Views\Shared\EditorTemplates\Enum.ascx" />
+    <Content Include="Views\Shared\DisplayTemplates\FilterContainer.ascx" />
+    <Content Include="Views\Shared\EditorTemplates\TimeZone.ascx" />
+    <Content Include="Views\Shared\PagerUserControl.ascx" />
+    <Content Include="Views\Statistics\StatisticsSearchFilter.ascx" />
+    <Content Include="Views\Statistics\Index.aspx" />
+    <Content Include="Views\Statistics\SearchResults.ascx" />
+    <Content Include="Views\Statistics\SearchResultsWithPaging.ascx" />
+    <Content Include="Views\UserProfile\Details.aspx" />
+    <Content Include="Views\UserProfile\Index.aspx" />
+    <Content Include="Views\UserProfile\SearchResults.ascx" />
+    <Content Include="Views\UserProfile\SearchResultsWithPaging.ascx" />
+    <Content Include="Views\UserProfile\UserProfileSearchFilter.ascx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\Account\ChangePassword.aspx" />
+    <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
+    <Content Include="Views\Account\LogOn.aspx" />
+    <Content Include="Views\Account\Register.aspx" />
+    <Content Include="Views\Home\About.aspx" />
+    <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Shared\Error.aspx" />
+    <Content Include="Views\Shared\LogOnUserControl.ascx" />
+    <Content Include="Views\Shared\Site.Master" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Service References\GateService\ADEService.wsdl" />
+    <None Include="Service References\GateService\ADEService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GateService\ADEService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GateService\ADEService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\GateService\ADEService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{AF54472B-9123-492C-8FC7-BCD53142EAAD}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcFlan\MvcFlan.csproj">
+      <Project>{5F2CD269-4482-4AFF-89A2-23196F35CDA5}</Project>
+      <Name>MvcFlan</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OliverTwist.Model\OliverTwist.Model.csproj">
+      <Project>{4BEFF9C2-4B08-41CE-9F51-9BFC8F7823DF}</Project>
+      <Name>OliverTwist.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\InputBuilderTemplates\Array.Master" />
+    <Content Include="Views\InputBuilderTemplates\Display.Master" />
+    <Content Include="Views\InputBuilderTemplates\Field.Master" />
+    <Content Include="Views\InputBuilderTemplates\HiddenField.Master" />
+    <Content Include="Views\InputBuilderTemplates\Row.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\GateService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>9049</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

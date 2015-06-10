@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<response method="SendSMS">
+  <sms num_message="0" id="12744476081" parts="1" part_no="1"/>
+  <sms num_message="1" id="12744476082" parts="1" part_no="1"/>
+  <sms num_message="2" id="12744476083" parts="1" part_no="1"/>
+</response>

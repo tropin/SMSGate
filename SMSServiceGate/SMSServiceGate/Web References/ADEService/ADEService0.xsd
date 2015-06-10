@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Csharper.Common" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Csharper.Common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:9049/Services/ADEService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfSMSSeriesId">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SMSSeriesId" type="tns:SMSSeriesId" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSMSSeriesId" nillable="true" type="tns:ArrayOfSMSSeriesId" />
+  <xs:complexType name="SMSSeriesId">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExternalId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="SeriesPosition" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SMSSeriesId" nillable="true" type="tns:SMSSeriesId" />
+  <xs:complexType name="ArrayOfSMSCheckItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SMSCheckItem" nillable="true" type="tns:SMSCheckItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSMSCheckItem" nillable="true" type="tns:ArrayOfSMSCheckItem" />
+  <xs:complexType name="SMSCheckItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="LastCheckUTC" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="MessageId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="tns:SMSStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SMSCheckItem" nillable="true" type="tns:SMSCheckItem" />
+  <xs:simpleType name="SMSStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="InQueue" />
+      <xs:enumeration value="Send" />
+      <xs:enumeration value="Delivered" />
+      <xs:enumeration value="SendError" />
+      <xs:enumeration value="ValidationError" />
+      <xs:enumeration value="Cancelled" />
+      <xs:enumeration value="CancellationPending" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SMSStatus" nillable="true" type="tns:SMSStatus" />
+</xs:schema>

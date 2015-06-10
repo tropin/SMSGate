@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="ftp://195.128.121.187/kotlyarav-7/WWWRoot/" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="ParkingSMSGate" publishMethod="FTP" replaceMatchingFiles="True" userName="kotlyarav-3" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAt2t/y4oTAk20aXyAeTl5IQAAAAACAAAAAAAQZgAAAAEAACAAAABFWoz2De607QBebGFwJ0vRcOBrOE884I6H3NijEB901wAAAAAOgAAAAAIAACAAAAAqSHhTr7LIVX84KJLQrdzFWkSnT5nPAtcl6IWXQeg5ISAAAACxFyWfkag8XPjZ7iBKySiwL8xyOo5s9qiKhtEeqW2usEAAAAAkw3/3ci92ERg8E26uhuoFt1nJFwnoLk/hIiBveuA4RpCmCOK/iv2NgBTvFdEMugTI9WeiwRAlaAYD/yNez7dD" SelectedForPublish="True">
+    <file relUrl="Web.config" publishTime="04/25/2011 16:02:56" />
+    <file relUrl="Data/Request.xml" publishTime="07/17/2010 16:24:21" />
+    <file relUrl="TestBatchSendV2.htm" publishTime="04/13/2011 22:03:40" />
+    <file relUrl="bin/Csharper.SMSServiceGate.dll" publishTime="04/25/2011 15:42:27" />
+    <file relUrl="bin/UnidecodeSharp.dll" publishTime="08/25/2010 12:37:25" />
+    <file relUrl="Data/ErrorSMSResp.xml" publishTime="07/17/2010 17:03:21" />
+    <file relUrl="Data/CheckSMSResp.xml" publishTime="07/17/2010 17:02:34" />
+    <file relUrl="Data/Responce.xml" publishTime="07/17/2010 16:30:17" />
+    <file relUrl="BatchSend.ashx" publishTime="04/25/2011 15:42:11" />
+    <file relUrl="bin/Xml.Schema.Linq.dll" publishTime="04/13/2010 23:00:14" />
+    <file relUrl="bin/Csharper.SMSServiceGate.pdb" publishTime="04/25/2011 15:42:27" />
+    <file relUrl="Data/CheckSMSReq.xml" publishTime="01/16/2011 22:53:14" />
+  </publishProfile>
+</publishData>

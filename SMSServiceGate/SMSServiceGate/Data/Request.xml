@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<request method="SendSMS">
+  <login>имя учетной записи</login>
+  <pwd>пароль учетной записи</pwd>
+
+  <originator num_message="0">BaikalSR.ru</originator>
+  <phone_to num_message="0">+791645665</phone_to>
+  <message num_message="0">Прибыл груз:  232кг;  11мест;1.00м3;СП-380515 Оплачен отправителем</message>
+  <sync num_message="0">0</sync>
+
+  <originator num_message="1">BaikalSR.ru</originator>
+  <phone_to num_message="1">+791634555</phone_to>
+  <message num_message="1">Прибыл груз:  232кг;  11мест;1.00м3;СП-380515 Оплачен отправителем</message>
+  <sync num_message="1">1</sync>
+  
+
+</request>

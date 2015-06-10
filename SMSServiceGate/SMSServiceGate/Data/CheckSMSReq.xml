@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<request method="CheckSMSFull">
+  <login>Admin</login>
+  <pwd>colonel</pwd>
+  <sms_id>1267199920544064825</sms_id>
+  <sms_id>1267199920544064825</sms_id>
+</request>

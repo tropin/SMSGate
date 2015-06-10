@@ -1,0 +1,607 @@
+﻿/*----------------------------------------------------------
+The base color for this template is #5c87b2. If you'd like
+to use a different color start by replacing all instances of
+#5c87b2 with your new color.
+----------------------------------------------------------*/
+body
+{
+    background-color: #5c87b2;
+    font-size: .75em;
+    font-family: Verdana, Helvetica, Sans-Serif;
+    margin: 0;
+    padding: 0;
+    color: #696969;
+}
+
+a:link
+{
+    color: #034af3;
+    text-decoration: underline;
+}
+a:visited
+{
+    color: #505abc;
+}
+a:hover
+{
+    color: #1d60ff;
+    text-decoration: none;
+}
+a:active
+{
+    color: #12eb87;
+}
+
+p, ul
+{
+    margin-bottom: 20px;
+    line-height: 1.6em;
+}
+
+/* HEADINGS   
+----------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6
+{
+    font-size: 1.5em;
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1
+{
+    font-size: 2em;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+h2
+{
+    padding: 0 0 10px 0;
+}
+h3
+{
+    font-size: 1.2em;
+}
+h4
+{
+    font-size: 1.1em;
+}
+h5, h6
+{
+    font-size: 1em;
+}
+
+/* this rule styles <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+    margin-top: 0;
+}
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+/* you can specify a greater or lesser percentage for the 
+page width. Or, you can specify an exact pixel width. */
+.page
+{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#header
+{
+    position: relative;
+    margin-bottom: 0px;
+    color: #000;
+    padding: 0;
+}
+
+#header h1
+{
+    font-weight: bold;
+    padding: 5px 0;
+    margin: 0;
+    color: #fff;
+    border: none;
+    line-height: 2em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 32px !important;
+}
+
+#main
+{
+    padding: 30px 30px 15px 30px;
+    background-color: #fff;
+    margin-bottom: 30px;
+    _height: 1px; /* only IE6 applies CSS properties starting with an underscore */
+}
+
+#footer
+{
+    color: #999;
+    padding: 10px 0;
+    text-align: center;
+    line-height: normal;
+    margin: 0;
+    font-size: .9em;
+}
+
+/* TAB MENU   
+----------------------------------------------------------*/
+ul#menu
+{
+    border-bottom: 1px #5C87B2 solid;
+    padding: 0 0 2px;
+    position: relative;
+    margin: 0;
+    text-align: right;
+}
+
+ul#menu li
+{
+    display: inline;
+    list-style: none;
+}
+
+ul#menu li#greeting
+{
+    padding: 10px 20px;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 2.8em;
+    color: #fff;
+}
+
+ul#menu li a
+{
+    padding: 10px 20px;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 2.8em;
+    background-color: #e8eef4;
+    color: #034af3;
+}
+
+ul#menu li a:hover
+{
+    background-color: #fff;
+    text-decoration: none;
+}
+
+ul#menu li a:active
+{
+    background-color: #a6e2a6;
+    text-decoration: none;
+}
+
+ul#menu li.selected a
+{
+    background-color: #fff;
+    color: #000;
+}
+
+/* FORM LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset 
+{
+    margin: 1em 0;
+    padding: 1em;
+    border: 1px solid #CCC;
+}
+
+fieldset p 
+{
+    margin: 2px 12px 10px 10px;
+}
+
+legend 
+{
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 2px 4px 8px 4px;
+}
+
+input[type="text"] 
+{
+    width: 200px;
+    border: 1px solid #CCC;
+}
+
+input[type="password"] 
+{
+    width: 200px;
+    border: 1px solid #CCC;
+}
+
+/* TABLE
+----------------------------------------------------------*/
+
+table 
+{
+  border: solid 1px #e8eef4;
+  border-collapse: collapse;
+}
+
+table td 
+{
+  padding: 5px;   
+  border: solid 1px #e8eef4;
+}
+
+table th
+{
+  padding: 6px 5px;
+  text-align: left;
+  background-color: #e8eef4; 
+  border: solid 1px #e8eef4;   
+}
+
+/* MISC  
+----------------------------------------------------------*/
+.clear
+{
+    clear: both;
+}
+
+.error
+{
+    color:Red;
+}
+
+#menucontainer
+{
+    margin-top:40px;
+}
+
+div#title
+{
+    display:block;
+    float:left;
+    text-align:left;
+}
+
+#logindisplay
+{
+    font-size:1.1em;
+    display:block;
+    text-align:right;
+    margin:10px;
+    color:White;
+}
+
+#logindisplay a:link
+{
+    color: white;
+    text-decoration: underline;
+}
+
+#logindisplay a:visited
+{
+    color: white;
+    text-decoration: underline;
+}
+
+#logindisplay a:hover
+{
+    color: white;
+    text-decoration: none;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+/* Styles for editor and display helpers
+----------------------------------------------------------*/
+.display-label,
+.editor-label,
+.display-field,
+.editor-field
+{
+    margin: 0.5em 0;
+}
+
+.text-box
+{
+    width: 30em;
+}
+
+.text-box.multi-line
+{
+    height: 6.5em;
+}
+
+.tri-state
+{
+    width: 6em;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+}
+
+.validation-summary-errors
+{
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+.validation-summary-errors ul
+{
+    list-style: none outside none;
+    margin: 5;
+    padding-left: 10px;
+}
+
+#form
+{
+    background-color: #EBE4D8;
+    width: 400px;
+    padding: 10px;
+}
+
+.editor-field, .display-field
+{
+    font-family:  Segoe UI, Tahoma, Verdana, Arial;
+    font-size: 1.2em;
+}
+
+.editor-field textarea, .editor-field input
+{
+    font-size: 1em;
+}
+
+.editor-label, .display-label
+{
+    padding-top: 8px;
+    padding-bottom: 1px;
+     
+    font-weight: bold;
+}
+
+.actions-region
+{
+    margin-top: 15px;
+}
+.actions-region a
+{
+    font-family: Tahoma, Verdana, Arial;
+    font-size: 1em;
+    text-decoration: none;
+}
+
+/*Buttons*/
+.btnNeutral, .actions-region a
+{
+    cursor: hand;
+    padding: 4px 12px 3px 12px;
+    width: 120px;
+    cursor: pointer;
+    overflow: visible;
+}
+
+
+
+.popupButton
+{
+	display: inline-block;
+	vertical-align: middle;
+    text-align: left;
+	width: 48px;
+	height: 48px;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+
+.changeAccount
+{
+	background-image: url(../Content/Images/EditAccount.png);
+}
+
+.historyOfClientAccount
+{
+	background-image: url(../Content/Images/history.png);
+}
+
+.sentHistory
+{
+	background-image: url(../Content/Images/Sent.png);
+}
+
+.btnNeutral, .actions-region a
+{
+    background-position: left bottom;
+    background-image: url(../Content/Images/NeutralButton.jpg);
+    background-repeat: repeat-x;
+    color: white;
+    font-weight: bold;
+    background-color: #CCCCCC;
+    border-right: 1px solid #184979;
+    border-bottom: 1px solid #184979;
+    border-left: 1px solid #7daddb;
+    border-top: 1px solid #7daddb;
+    border-color: #CCCCCC #999999 #999999 #CCCCCC;
+}
+
+.table-list
+{
+    text-align: left;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-list th
+{
+    font-size: 9pt !important;
+    border-bottom: 2px solid #6678B1;
+    text-align: left;
+}
+
+.table-list .tr-alt-item
+{
+    background-color: #eee;
+}
+
+.table-list .tr-item
+{
+    background-color: #fff;
+}
+
+.table-list td
+{
+    padding: 5px;
+}
+#searchFilter
+{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #E9E9E9 #CCCCCC #CCCCCC #E9E9E9;
+    background-color: #BFDFFF;
+    padding: 10px;
+    background: -moz-linear-gradient(top, #BFDFFF, #F0F8FF);
+    background: -webkit-gradient(linear, left top, left bottom, from(#BFDFFF), to(#F0F8FF));
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#BFDFFF', EndColorStr='#F0F8FF');
+}
+#searchFilter div
+{
+    float: left;
+    padding: 5px;
+}
+#searchFilter label
+{
+    display: block;
+    padding-top: 5px;
+    font-size: 0.9em;
+}
+#searchFilter span
+{
+    clear: both;
+    display: block;
+    padding-top: 5px;
+}
+
+.pagination
+{
+    clear: both;
+    border: 1px solid #A2C1A2;
+    padding: 5px;
+    background-color: #D5E3D5;
+}
+
+#detailsContainer 
+{
+    padding:10px;
+}
+
+.float_left
+{
+    float: left;
+}
+
+.float_right 
+{
+    float: right;
+}
+
+.clear_left 
+{
+    clear: left;
+}
+
+.clear_right 
+{
+    clear: right;
+}
+
+.groupsTree
+{
+	margin: 10px 10px 5px 5px;
+	padding-right: 5px;
+}
+
+.account_change_label 
+{
+    clear: left;
+    float: left;
+    height: 18px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.account_change_textbox
+{
+    float: right;
+    height: 22px;
+}
+
+.account_change_checkbox 
+{
+    clear: right;
+    height: 22px;
+    float: right;
+}
+
+.account_change_datarow 
+{
+    padding-bottom: 2px;
+    clear: right;
+    overflow: hidden;
+}
+
+.selectedGroup
+{
+	color: white;
+	font-weight: bold;
+	background-color: black;
+	border: 1px dashed gray; 
+	border-radius: 15px;
+	width: 100px;
+	display: inline;
+	float: none;
+	margin-left: 5px;
+	position: static;
+}

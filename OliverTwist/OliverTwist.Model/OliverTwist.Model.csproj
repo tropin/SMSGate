@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4BEFF9C2-4B08-41CE-9F51-9BFC8F7823DF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Csharper.OliverTwist.Model</RootNamespace>
+    <AssemblyName>OliverTwist.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LinqKit">
+      <HintPath>..\Library\LinqKit.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib">
+      <HintPath>..\Library\MvcContrib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApproveHasher.cs" />
+    <Compile Include="BallancePolicy.cs" />
+    <Compile Include="Billing\BillingProcessor.cs" />
+    <Compile Include="Binders\ConverterContext.cs" />
+    <Compile Include="ColumnMapItem.cs" />
+    <Compile Include="Converters\JSONStringConverter.cs" />
+    <Compile Include="Converters\ListOfStringConverter.cs" />
+    <Compile Include="FileColumnsMap.cs" />
+    <Compile Include="ImportPolicy.cs" />
+    <Compile Include="Model\AccountType.cs" />
+    <Compile Include="Model\AddressGroupModel.cs" />
+    <Compile Include="Model\ClientAccountActionModel.cs" />
+    <Compile Include="Model\ClientAccountModel.cs" />
+    <Compile Include="Model\ChangeClientAccountModel.cs" />
+    <Compile Include="Model\CostCalculatorMode.cs" />
+    <Compile Include="Model\CostRangeModel.cs" />
+    <Compile Include="Model\DebtingType.cs" />
+    <Compile Include="Model\DistributionStatus.cs" />
+    <Compile Include="Model\GroupState.cs" />
+    <Compile Include="Model\HistoryAction.cs" />
+    <Compile Include="Model\NewClientModel.cs" />
+    <Compile Include="Model\StatisticsModel.cs" />
+    <Compile Include="Model\UserProfileModel.cs" />
+    <Compile Include="OTController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Repo\ClientAccountRepo.cs" />
+    <Compile Include="Repo\AddressRepo.cs" />
+    <Compile Include="Repo\IClientAccountRepo.cs" />
+    <Compile Include="Repo\IAddressRepo.cs" />
+    <Compile Include="Repo\IUserProfileRepo.cs" />
+    <Compile Include="Repo\UserProfileRepo.cs" />
+    <Compile Include="RoleNames.cs" />
+    <Compile Include="Model\Sex.cs" />
+    <Compile Include="Model\AccountModels.cs" />
+    <Compile Include="Binders\MetaBinder.cs" />
+    <Compile Include="Model\ClientModel.cs" />
+    <Compile Include="Model\ClientStatus.cs" />
+    <Compile Include="Converters\TimeZoneConverter.cs" />
+    <Compile Include="Extensions\ModelExtensions.cs" />
+    <Compile Include="Model\AddressModel.cs" />
+    <Compile Include="Repo\ClientRepo.cs" />
+    <Compile Include="Repo\IClientRepo.cs" />
+    <Compile Include="RepoGetter.cs" />
+    <Compile Include="DB.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="RepoBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SessionAcessor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="DB.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DB.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DB.dbml.layout">
+      <DependentUpon>DB.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{AF54472B-9123-492C-8FC7-BCD53142EAAD}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcFlan\MvcFlan.csproj">
+      <Project>{5F2CD269-4482-4AFF-89A2-23196F35CDA5}</Project>
+      <Name>MvcFlan</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

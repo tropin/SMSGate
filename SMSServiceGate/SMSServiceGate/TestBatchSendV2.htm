@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<script language="javascript">
+    function alertContents() {
+        if (http_request.readyState == 4) {
+            if (http_request.status == 200) {
+                var result = http_request.responseText;
+                document.getElementById('result').innerText = result;
+            } else {
+                alert('There was a problem with the request.');
+            }
+        }
+    }
+
+    
+    
+    function makePOSTRequest(url, parameters) {
+        http_request = false;
+        if (window.XMLHttpRequest) { // Mozilla, Safari,...
+            http_request = new XMLHttpRequest();
+            if (http_request.overrideMimeType) {
+                // set type accordingly to anticipated content type
+                //http_request.overrideMimeType('text/xml');
+                http_request.overrideMimeType('text/html');
+            }
+        } else if (window.ActiveXObject) { // IE
+            try {
+                http_request = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch (e) {
+                try {
+                    http_request = new ActiveXObject("Microsoft.XMLHTTP");
+                } catch (e) { }
+            }
+        }
+        if (!http_request) {
+            alert('Cannot create XMLHTTP instance');
+            return false;
+        }
+
+        http_request.onreadystatechange = alertContents;
+        http_request.open('POST', url, true);
+        http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        http_request.setRequestHeader("Content-length", parameters.length);
+        http_request.setRequestHeader("Connection", "close");
+        http_request.send(parameters);
+    }
+</script>
+<body>
+    <form method="post" action="BatchSend.ashx">
+        <textarea cols="200" rows="20" id="main">
+                        <request method="SendSMS">
+                            <login>maden</login>
+                            <pwd><![CDATA[Lf<eltnCdtn]]></pwd>
+
+                            <originator num_message="0">Development</originator>
+                            <phone_to num_message="0">79198035596</phone_to>
+                            <message num_message="0">Ваш текст SMS ваправывапрпавапВаш текст SMS ваправывапрпитакрмиф конец</message>
+                            <sync num_message="0">0</sync>
+
+                            <originator num_message="1">Development</originator>
+                            <phone_to num_message="1">79198035596</phone_to>
+                            <message num_message="1">This must be one complete sms message encoded by 7bit alphabet wihtout any parts or chunks it must be onecompete long test without interruptions or any other th</message>
+                            <sync num_message="1">1</sync>
+
+                            <originator num_message="2">Development</originator>
+                            <phone_to num_message="2">79198035596</phone_to>
+                            <message num_message="2">This must be one complete sms message encoded by 7bit alphabet wihtout any parts or chunks it must be onecompete long test without interruptions or any other th that is second part starting from here it is just concatenaded SMS for store a longer message than 160 characters, it is law withowt any exceptions now the ens fi</message>
+                            <sync num_message="2">2</sync>
+
+                            <originator num_message="3">Development</originator>
+                            <phone_to num_message="3">79198035596</phone_to>
+                            <message num_message="3">Текст второго СМС на тот же номер, но длинное, эта хрень должна придти со шлюза, ибо он пиздат и может все, что касается СМС. Ибо заебок оно</message>
+                            <sync num_message="3">3</sync>
+                        </request> 
+        </textarea>
+        <input type="button" onclick="makePOSTRequest('BatchSend.ashx', document.getElementById('main').value)" value="Отправить"/>
+    </form>
+    <pre id="result">
+    </pre>
+</body>
+</html>

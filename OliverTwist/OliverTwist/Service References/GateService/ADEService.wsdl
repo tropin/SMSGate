@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ADEService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:7049/ADEService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:7049/ADEService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:7049/ADEService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:7049/ADEService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Csharper.Common" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IADEService_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IADEService_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IADEService_SendSms_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendSms" />
+  </wsdl:message>
+  <wsdl:message name="IADEService_SendSms_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendSmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IADEService_CheckSMSStatuses_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckSMSStatuses" />
+  </wsdl:message>
+  <wsdl:message name="IADEService_CheckSMSStatuses_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckSMSStatusesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IADEService_GetSMSCounters_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSMSCounters" />
+  </wsdl:message>
+  <wsdl:message name="IADEService_GetSMSCounters_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSMSCountersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IADEService_GetSMSDetalization_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSMSDetalization" />
+  </wsdl:message>
+  <wsdl:message name="IADEService_GetSMSDetalization_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSMSDetalizationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IADEService_CheckSMSByMessageId_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckSMSByMessageId" />
+  </wsdl:message>
+  <wsdl:message name="IADEService_CheckSMSByMessageId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckSMSByMessageIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IADEService_CheckSMSById_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckSMSById" />
+  </wsdl:message>
+  <wsdl:message name="IADEService_CheckSMSById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckSMSByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IADEService_CheckSMS_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckSMS" />
+  </wsdl:message>
+  <wsdl:message name="IADEService_CheckSMS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="IADEService_LogOff_InputMessage">
+    <wsdl:part name="parameters" element="tns:LogOff" />
+  </wsdl:message>
+  <wsdl:message name="IADEService_LogOff_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogOffResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IADEService">
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IADEService/Login" message="tns:IADEService_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IADEService/LoginResponse" message="tns:IADEService_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSms">
+      <wsdl:input wsaw:Action="http://tempuri.org/IADEService/SendSms" message="tns:IADEService_SendSms_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IADEService/SendSmsResponse" message="tns:IADEService_SendSms_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckSMSStatuses">
+      <wsdl:input wsaw:Action="http://tempuri.org/IADEService/CheckSMSStatuses" message="tns:IADEService_CheckSMSStatuses_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IADEService/CheckSMSStatusesResponse" message="tns:IADEService_CheckSMSStatuses_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSMSCounters">
+      <wsdl:input wsaw:Action="http://tempuri.org/IADEService/GetSMSCounters" message="tns:IADEService_GetSMSCounters_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IADEService/GetSMSCountersResponse" message="tns:IADEService_GetSMSCounters_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSMSDetalization">
+      <wsdl:input wsaw:Action="http://tempuri.org/IADEService/GetSMSDetalization" message="tns:IADEService_GetSMSDetalization_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IADEService/GetSMSDetalizationResponse" message="tns:IADEService_GetSMSDetalization_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckSMSByMessageId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IADEService/CheckSMSByMessageId" message="tns:IADEService_CheckSMSByMessageId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IADEService/CheckSMSByMessageIdResponse" message="tns:IADEService_CheckSMSByMessageId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckSMSById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IADEService/CheckSMSById" message="tns:IADEService_CheckSMSById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IADEService/CheckSMSByIdResponse" message="tns:IADEService_CheckSMSById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckSMS">
+      <wsdl:input wsaw:Action="http://tempuri.org/IADEService/CheckSMS" message="tns:IADEService_CheckSMS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IADEService/CheckSMSResponse" message="tns:IADEService_CheckSMS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LogOff">
+      <wsdl:input wsaw:Action="http://tempuri.org/IADEService/LogOff" message="tns:IADEService_LogOff_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IADEService/LogOffResponse" message="tns:IADEService_LogOff_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IADEService" type="tns:IADEService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/IADEService/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSms">
+      <soap:operation soapAction="http://tempuri.org/IADEService/SendSms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSMSStatuses">
+      <soap:operation soapAction="http://tempuri.org/IADEService/CheckSMSStatuses" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSMSCounters">
+      <soap:operation soapAction="http://tempuri.org/IADEService/GetSMSCounters" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSMSDetalization">
+      <soap:operation soapAction="http://tempuri.org/IADEService/GetSMSDetalization" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSMSByMessageId">
+      <soap:operation soapAction="http://tempuri.org/IADEService/CheckSMSByMessageId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSMSById">
+      <soap:operation soapAction="http://tempuri.org/IADEService/CheckSMSById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckSMS">
+      <soap:operation soapAction="http://tempuri.org/IADEService/CheckSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogOff">
+      <soap:operation soapAction="http://tempuri.org/IADEService/LogOff" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ADEService">
+    <wsdl:port name="BasicHttpBinding_IADEService" binding="tns:BasicHttpBinding_IADEService">
+      <soap:address location="http://localhost:7049/ADEService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

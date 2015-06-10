@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Csharper.OliverTwist.Services.ADEService" CodeBehind="ADEService.svc.cs" %>

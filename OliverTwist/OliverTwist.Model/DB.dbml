@@ -1,0 +1,451 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="OliverTwist" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=MADEN\SQLEXPRESS;Initial Catalog=OliverTwist;Integrated Security=True" SettingsObjectName="Csharper.OliverTwist.Model.Properties.Settings" SettingsPropertyName="OliverTwistConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Account" Member="Accounts">
+    <Type Name="Account">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="AccountType" Type="global::Csharper.OliverTwist.Model.AccountType" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DebtingType" Type="global::Csharper.OliverTwist.Model.DebtingType" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Account_Client" Member="HolderClient" ThisKey="Id" OtherKey="AccountId" Type="Client" Cardinality="One" />
+      <Association Name="Account_CostRange" Member="CostRanges" ThisKey="Id" OtherKey="AccountId" Type="CostRange" />
+      <Association Name="Account_AccountOptionHistory" Member="AccountOptionHistories" ThisKey="Id" OtherKey="Id" Type="AccountOptionHistory" />
+      <Association Name="Account_CostRangesHistory" Member="CostRangesHistories" ThisKey="Id" OtherKey="AccountId" Type="CostRangesHistory" />
+      <Association Name="Account_AccountHistory" Member="AccountHistories" ThisKey="Id" OtherKey="Id" Type="AccountHistory" />
+      <Association Name="Account_AccountTemplate" Member="Template" ThisKey="Id" OtherKey="AccountId" Type="AccountTemplate" Cardinality="One" />
+      <Association Name="Account_AccountLock" Member="AccountLocks" ThisKey="Id" OtherKey="AccountId" Type="AccountLock" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AddressBook" Member="AddressBooks">
+    <Type Name="AddressBook">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="Sex" Type="global::Csharper.OliverTwist.Model.Sex?" DbType="Int" CanBeNull="true" />
+      <Column Name="BirthDay" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="MobilePhone" Type="System.String" DbType="NVarChar(4000) NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="TimeZone" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="AddressBook_Groups2Address" Member="Assigments" ThisKey="Id" OtherKey="AddressId" Type="Groups2Address" />
+      <Association Name="Client_AddressBook" Member="OwnerClient" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AddressGroups" Member="AddressGroups">
+    <Type Name="AddressGroup">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="ClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="AddressGroup_Groups2Address" Member="Assigments" ThisKey="Id" OtherKey="GroupId" Type="Groups2Address" />
+      <Association Name="AddressGroup_Groups2Address1" Member="MasterAssigments" ThisKey="Id" OtherKey="SlaveGroupId" Type="Groups2Address" />
+      <Association Name="Client_AddressGroup" Member="OwnerClient" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Users" Member="aspnet_Users">
+    <Type Name="aspnet_User">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredUserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileAlias" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="IsAnonymous" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LastActivityDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_User_SenderName" Member="ApprovedSenderNames" ThisKey="UserId" OtherKey="ApproveManagerId" Type="SenderName" />
+      <Association Name="aspnet_User_Users2Client" Member="ClientAssigments" ThisKey="UserId" OtherKey="UserId" Type="Users2Client" Cardinality="One" />
+      <Association Name="aspnet_User_aspnet_Membership" Member="Membership" ThisKey="UserId" OtherKey="UserId" Type="aspnet_Membership" Cardinality="One" />
+      <Association Name="aspnet_User_AccountOptionHistory" Member="AccountOptionHistories" ThisKey="UserId" OtherKey="ManagerId" Type="AccountOptionHistory" />
+      <Association Name="aspnet_User_CostRangesHistory" Member="CostRangesHistories" ThisKey="UserId" OtherKey="ManagerId" Type="CostRangesHistory" />
+      <Association Name="aspnet_User_DistributionHistory" Member="DistributionHistories" ThisKey="UserId" OtherKey="ManagerId" Type="DistributionHistory" />
+      <Association Name="aspnet_User_AccountHistory" Member="AccountHistories" ThisKey="UserId" OtherKey="ManagerId" Type="AccountHistory" />
+      <Association Name="aspnet_User_UserProfile" Member="Profile" Storage="_UserProfiles" ThisKey="UserId" OtherKey="UserId" Type="UserProfile" Cardinality="One" />
+      <Association Name="aspnet_User_aspnet_UsersInRole" Member="RoleAssigments" ThisKey="UserId" OtherKey="UserId" Type="aspnet_UsersInRole" />
+      <Association Name="aspnet_User_ClientsHistory" Member="ClientsHistoryAsManager" ThisKey="UserId" OtherKey="ManagerId" Type="ClientsHistory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Distributions" Member="Distributions">
+    <Type Name="Distribution">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Recipients" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="STOPList" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SenderNameId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="SmsTTL" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Text" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="TemplateId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Transliterate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedByClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="global::Csharper.OliverTwist.Model.DistributionStatus" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Distribution_DistributionHistory" Member="DistributionHistories" ThisKey="Id" OtherKey="Id" Type="DistributionHistory" />
+      <Association Name="Distribution_AccountHistory" Member="DebtingHistory" ThisKey="Id" OtherKey="DistributionId" Type="AccountHistory" />
+      <Association Name="Distribution_AccountLock" Member="AccountLocks" ThisKey="Id" OtherKey="DistributionId" Type="AccountLock" />
+      <Association Name="MessageTemplate_Distribution" Member="MessageTemplate" ThisKey="TemplateId" OtherKey="Id" Type="MessageTemplate" IsForeignKey="true" />
+      <Association Name="SenderName_Distribution" Member="SenderName" ThisKey="SenderNameId" OtherKey="Id" Type="SenderName" IsForeignKey="true" />
+      <Association Name="Client_Distribution" Member="OwnerClient" ThisKey="CreatedByClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Groups2Addresses" Member="Groups2Addresses">
+    <Type Name="Groups2Address">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AddressId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="GroupId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="SlaveGroupId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="GroupType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="AddressGroup_Groups2Address" Member="Group" ThisKey="GroupId" OtherKey="Id" Type="AddressGroup" IsForeignKey="true" />
+      <Association Name="AddressBook_Groups2Address" Member="Address" ThisKey="AddressId" OtherKey="Id" Type="AddressBook" IsForeignKey="true" />
+      <Association Name="AddressGroup_Groups2Address1" Member="SlaveGroup" ThisKey="SlaveGroupId" OtherKey="Id" Type="AddressGroup" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MessageTemplates" Member="MessageTemplates">
+    <Type Name="MessageTemplate">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Text" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="MessageTemplate_Distribution" Member="Distributions" ThisKey="Id" OtherKey="TemplateId" Type="Distribution" />
+      <Association Name="Client_MessageTemplate" Member="OwnerClient" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SenderNames" Member="SenderNames">
+    <Type Name="SenderName">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ApproveDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(2000) NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ApproveManagerId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="SenderName_Distribution" Member="Distributions" ThisKey="Id" OtherKey="SenderNameId" Type="Distribution" />
+      <Association Name="aspnet_User_SenderName" Member="ApprovedBy" ThisKey="ApproveManagerId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+      <Association Name="Client_SenderName" Member="OwnerClient" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users2Clients" Member="Users2Clients">
+    <Type Name="Users2Client">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="ClientId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_User_Users2Client" Member="User" ThisKey="UserId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+      <Association Name="Client_Users2Client" Member="Client" ThisKey="ClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Membership" Member="aspnet_Memberships">
+    <Type Name="aspnet_Membership">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordFormat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordSalt" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="MobilePIN" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="LoweredEmail" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="PasswordQuestion" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="PasswordAnswer" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="IsApproved" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsLockedOut" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastLoginDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastPasswordChangedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastLockoutDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FailedPasswordAttemptCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FailedPasswordAttemptWindowStart" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FailedPasswordAnswerAttemptCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FailedPasswordAnswerAttemptWindowStart" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="aspnet_User_aspnet_Membership" Member="User" ThisKey="UserId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Clients" Member="Clients">
+    <Type Name="Client" Id="ID1">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrganizationName" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="Status" Type="global::Csharper.OliverTwist.Model.ClientStatus?" DbType="Int" CanBeNull="true" />
+      <Column Name="DeallerOfClientId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedByClientId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="AccountId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Client_AddressBook" Member="Addresses" ThisKey="Id" OtherKey="ClientId" Type="AddressBook" />
+      <Association Name="Client_AddressGroup" Member="AddressGroups" ThisKey="Id" OtherKey="ClientId" Type="AddressGroup" />
+      <Association Name="Client_Distribution" Member="Distributions" ThisKey="Id" OtherKey="CreatedByClientId" Type="Distribution" />
+      <Association Name="Client_MessageTemplate" Member="MessageTemplates" ThisKey="Id" OtherKey="ClientId" Type="MessageTemplate" />
+      <Association Name="Client_SenderName" Member="SenderNames" ThisKey="Id" OtherKey="ClientId" Type="SenderName" />
+      <Association Name="Client_Users2Client" Member="UserAssigments" ThisKey="Id" OtherKey="ClientId" Type="Users2Client" />
+      <Association Name="Client_Client" Member="OwnedClients" ThisKey="Id" OtherKey="CreatedByClientId" Type="Client" />
+      <Association Name="Client_Client1" Member="Deallers" ThisKey="Id" OtherKey="DeallerOfClientId" Type="Client" />
+      <Association Name="Client_AccountOptionHistory" Member="AccountOptionHistoriesAsOperational" ThisKey="Id" OtherKey="OperationalClientId" Type="AccountOptionHistory" />
+      <Association Name="Client_AccountOptionHistory1" Member="AccountOptionHistoriesAsReal" ThisKey="Id" OtherKey="RealClientId" Type="AccountOptionHistory" />
+      <Association Name="Client_CostRangesHistory" Member="CostRangesHistoriesAsOperational" ThisKey="Id" OtherKey="OperationalClientId" Type="CostRangesHistory" />
+      <Association Name="Client_CostRangesHistory1" Member="CostRangesHistoryAsReal" ThisKey="Id" OtherKey="RealClientId" Type="CostRangesHistory" />
+      <Association Name="Client_DistributionHistory" Member="DistributionHistoriesAsOperational" ThisKey="Id" OtherKey="OperationalClientId" Type="DistributionHistory" />
+      <Association Name="Client_DistributionHistory1" Member="DistributionHistoriesAsReal" ThisKey="Id" OtherKey="RealClientId" Type="DistributionHistory" />
+      <Association Name="Client_AccountHistory" Member="AccountHistoriesAsOperational" ThisKey="Id" OtherKey="OperationalClientId" Type="AccountHistory" />
+      <Association Name="Client_AccountHistory1" Member="AccountHistoriesAsReal" ThisKey="Id" OtherKey="RealClientId" Type="AccountHistory" />
+      <Association Name="Client_ClientsHistory" Member="ClientsHistoryAsOperational" ThisKey="Id" OtherKey="OperationalClientId" Type="ClientsHistory" />
+      <Association Name="Client_ClientsHistory1" Member="ClientsHistoryAsReal" ThisKey="Id" OtherKey="RealClientId" Type="ClientsHistory" />
+      <Association Name="Client_ClientsHistory2" Member="ClientsHistory" ThisKey="Id" OtherKey="Id" Type="ClientsHistory" />
+      <Association Name="Client_AccountTemplate" Member="AccountTemplates" ThisKey="Id" OtherKey="ClientOwnerId" Type="AccountTemplate" />
+      <Association Name="Account_Client" Member="Account" ThisKey="AccountId" OtherKey="Id" Type="Account" IsForeignKey="true" />
+      <Association Name="Client_Client" Member="OwnerClient" ThisKey="CreatedByClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+      <Association Name="Client_Client1" Member="ProviderClient" ThisKey="DeallerOfClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CostRanges" Member="CostRanges">
+    <Type Name="CostRange">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AccountId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Cost" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Volume" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LowerSumm" Type="System.Decimal" DbType="Decimal" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="CostRange_CostRangesHistory" Member="CostRangesHistories" ThisKey="Id" OtherKey="Id" Type="CostRangesHistory" />
+      <Association Name="Account_CostRange" Member="Account" ThisKey="AccountId" OtherKey="Id" Type="Account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AccountOptionHistory" Member="AccountOptionHistories">
+    <Type Name="AccountOptionHistory">
+      <Column Name="VersionId" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="AccountType" Type="global::Csharper.OliverTwist.Model.AccountType" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DebtingType" Type="global::Csharper.OliverTwist.Model.DebtingType" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Action" Type="global::Csharper.OliverTwist.Model.HistoryAction?" DbType="Int" CanBeNull="true" />
+      <Column Name="ManagerId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="RealClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="true" />
+      <Column Name="OperationalClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="true" />
+      <Column Name="VersionDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_User_AccountOptionHistory" Member="ActionUser" ThisKey="ManagerId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+      <Association Name="Client_AccountOptionHistory" Member="ActionOperationalClient" ThisKey="OperationalClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+      <Association Name="Client_AccountOptionHistory1" Member="ActionRealClient" ThisKey="RealClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+      <Association Name="Account_AccountOptionHistory" Member="Account" ThisKey="Id" OtherKey="Id" Type="Account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CostRangesHistory" Member="CostRangesHistories">
+    <Type Name="CostRangesHistory">
+      <Column Name="VersionId" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="AccountId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Cost" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Volume" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Action" Type="global::Csharper.OliverTwist.Model.HistoryAction?" DbType="Int" CanBeNull="true" />
+      <Column Name="ManagerId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="true" />
+      <Column Name="RealClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="true" />
+      <Column Name="OperationalClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="true" />
+      <Column Name="VersionDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="CostRangesHistory_AccountHistory" Member="AccountHistories" ThisKey="VersionId" OtherKey="CostRangeId" Type="AccountHistory" />
+      <Association Name="aspnet_User_CostRangesHistory" Member="ActionUser" ThisKey="ManagerId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+      <Association Name="Client_CostRangesHistory" Member="ActionOperationalClient" ThisKey="OperationalClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+      <Association Name="Client_CostRangesHistory1" Member="ActionRealClient" ThisKey="RealClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+      <Association Name="CostRange_CostRangesHistory" Member="CostRange" ThisKey="Id" OtherKey="Id" Type="CostRange" IsForeignKey="true" />
+      <Association Name="Account_CostRangesHistory" Member="Account" ThisKey="AccountId" OtherKey="Id" Type="Account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DistributionHistory" Member="DistributionHistories">
+    <Type Name="DistributionHistory">
+      <Column Name="VersionId" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="global::Csharper.OliverTwist.Model.DistributionStatus" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Action" Type="global::Csharper.OliverTwist.Model.HistoryAction?" DbType="Int" CanBeNull="true" />
+      <Column Name="ManagerId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="RealClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="OperationalClientId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="VersionDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_User_DistributionHistory" Member="ActionUser" ThisKey="ManagerId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+      <Association Name="Client_DistributionHistory" Member="ActionOperationalClient" ThisKey="OperationalClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+      <Association Name="Client_DistributionHistory1" Member="ActionRealClient" ThisKey="RealClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+      <Association Name="Distribution_DistributionHistory" Member="Distribution" ThisKey="Id" OtherKey="Id" Type="Distribution" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AccountHistory" Member="AccountHistories">
+    <Type Name="AccountHistory">
+      <Column Name="VersionId" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="CostRangeId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="AmountDelta" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="QuickCost" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="MoneyVolume" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="ManagerId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="RealClientId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="OperationalClientId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="VersionDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DistributionId" Type="System.Int64" DbType="BIGINT" CanBeNull="true" />
+      <Column Name="TargetAccountId" Type="System.Int64" DbType="BIGINT" CanBeNull="true" />
+      <Association Name="AccountHistory_AccountHistory" Member="PayerAccountRecord" ThisKey="VersionId" OtherKey="TargetAccountId" Type="AccountHistory" Cardinality="One" />
+      <Association Name="aspnet_User_AccountHistory" Member="ActionUser" ThisKey="ManagerId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+      <Association Name="Client_AccountHistory" Member="ActionOperationalClient" ThisKey="OperationalClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+      <Association Name="Client_AccountHistory1" Member="ActionRealClient" ThisKey="RealClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+      <Association Name="Account_AccountHistory" Member="Account" ThisKey="Id" OtherKey="Id" Type="Account" IsForeignKey="true" />
+      <Association Name="CostRangesHistory_AccountHistory" Member="CostRangesHistory" ThisKey="CostRangeId" OtherKey="VersionId" Type="CostRangesHistory" IsForeignKey="true" />
+      <Association Name="AccountHistory_AccountHistory" Member="RecieverAccountRecord" ThisKey="TargetAccountId" OtherKey="VersionId" Type="AccountHistory" IsForeignKey="true" />
+      <Association Name="Distribution_AccountHistory" Member="Distribution" ThisKey="DistributionId" OtherKey="Id" Type="Distribution" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserProfile" Member="UserProfiles">
+    <Type Name="UserProfile">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(4000) NOT NULL" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(4000) NOT NULL" CanBeNull="true" />
+      <Column Name="MobilePhone" Type="System.String" DbType="NVarChar(4000) NOT NULL" CanBeNull="true" />
+      <Column Name="Sex" Type="global::Csharper.OliverTwist.Model.Sex?" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeZone" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_User_UserProfile" Member="User" Storage="_aspnet_User" ThisKey="UserId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_UsersInRoles" Member="aspnet_UsersInRoles">
+    <Type Name="aspnet_UsersInRole">
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="aspnet_User_aspnet_UsersInRole" Member="User" ThisKey="UserId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+      <Association Name="aspnet_Role_aspnet_UsersInRole" Member="Role" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_Role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Roles" Member="aspnet_Roles">
+    <Type Name="aspnet_Role">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredRoleName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Association Name="aspnet_Role_aspnet_UsersInRole" Member="UserAssigments" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_UsersInRole" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ClientsHistory" Member="ClientsHistories">
+    <Type Name="ClientsHistory">
+      <Column Name="VersionId" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="OrganizationName" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="Status" Type="global::Csharper.OliverTwist.Model.ClientStatus?" DbType="Int" CanBeNull="true" />
+      <Column Name="DeallerOfClientId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedByClientId" Type="System.Int64?" DbType="BigInt" CanBeNull="true" />
+      <Column Name="AccountId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Action" Type="global::Csharper.OliverTwist.Model.HistoryAction?" DbType="Int" CanBeNull="true" />
+      <Column Name="ManagerId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="RealClientId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="OperationalClientId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="VersionDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_User_ClientsHistory" Member="ActionManager" ThisKey="ManagerId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+      <Association Name="Client_ClientsHistory" Member="ActionOperationalClient" ThisKey="OperationalClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+      <Association Name="Client_ClientsHistory1" Member="ActionRealClient" ThisKey="RealClientId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+      <Association Name="Client_ClientsHistory2" Member="Client" ThisKey="Id" OtherKey="Id" Type="Client" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AccountTemplates" Member="AccountTemplates">
+    <Type Name="AccountTemplate">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(4000) NOT NULL" CanBeNull="false" />
+      <Column Name="AccountId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ClientOwnerId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Association Name="Client_AccountTemplate" Member="OwnerClient" ThisKey="ClientOwnerId" OtherKey="Id" Type="Client" IsForeignKey="true" />
+      <Association Name="Account_AccountTemplate" Member="Account" ThisKey="AccountId" OtherKey="Id" Type="Account" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AccountLocks" Member="AccountLocks">
+    <Type Name="AccountLock">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AccountId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="DistributionId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsFinal" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ExtDistributionId" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
+      <Column Name="LockDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DeleteTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Account_AccountLock" Member="Account" ThisKey="AccountId" OtherKey="Id" Type="Account" IsForeignKey="true" />
+      <Association Name="Distribution_AccountLock" Member="Distribution" ThisKey="DistributionId" OtherKey="Id" Type="Distribution" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.CreateClient" Method="CreateClient">
+    <Parameter Name="UserId" Parameter="userId" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="OrganizationName" Parameter="organizationName" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="IsDealler" Parameter="isDealler" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="OwnerClientId" Parameter="ownerClientId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="InitialAccountAmount" Parameter="initialAccountAmount" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="InitialCost" Parameter="initialCost" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="InitialAccountType" Parameter="initialAccountType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="InitialAccountDebtingType" Parameter="initialAccountDebtingType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TemplateAccountId" Parameter="templateAccountId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="ClientStatus" Parameter="clientStatus" Type="System.Int32" DbType="Int" />
+    <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="MiddleName" Parameter="middleName" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="City" Parameter="city" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="MobilePhone" Parameter="mobilePhone" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="TimeZone" Parameter="timeZone" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="Sex" Parameter="sex" Type="System.Int32" DbType="Int" />
+    <ElementType IdRef="ID1" />
+  </Function>
+  <Function Name="dbo.ChangeClientAccount" Method="ChangeClientAccount">
+    <Parameter Name="AccountId" Parameter="accountId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Amount" Parameter="amount" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="Cost" Parameter="cost" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="MoneyVolume" Parameter="moneyVolume" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="SelectedRangeId" Parameter="selectedRangeId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Comment" Parameter="comment" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="ManagerId" Parameter="managerId" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="RealClientId" Parameter="realClientId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="OperationalClientId" Parameter="operationalClientId" Type="System.Int64" DbType="BigInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetClearBallance" Method="GetClearBallance" IsComposable="true">
+    <Parameter Name="ClientId" Parameter="clientId" Type="System.Int64" DbType="BigInt" />
+    <Return Type="System.Decimal" />
+  </Function>
+  <Function Name="dbo.GetOverDraftBallance" Method="GetOverDraftBallance" IsComposable="true">
+    <Parameter Name="ClientId" Parameter="clientId" Type="System.Int64" DbType="BigInt" />
+    <Return Type="System.Decimal" />
+  </Function>
+  <Function Name="dbo.DeleteUserInternal" Method="DeleteUserInternal">
+    <Parameter Name="UserId" Parameter="userId" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetUndercontrolClients" Method="GetUnderControlClients" IsComposable="true">
+    <Parameter Name="RootClient" Parameter="rootClient" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="GetUnderControlClientsResult">
+      <Column Name="id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="CreatedByClientId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="OrganizationName" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="ChildLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.LockSMS" Method="LockSMS">
+    <Parameter Name="ClientId" Parameter="clientId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Count" Parameter="count" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="DistributionId" Parameter="distributionId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="ExtDistributionId" Parameter="extDistributionId" Type="System.String" DbType="NVarChar(300)" />
+    <ElementType Name="LockSMSResult">
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="AccountId" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.FinalizeSMSLock" Method="FinalizeSMSLock">
+    <Parameter Name="ClientId" Parameter="clientId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Count" Parameter="count" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="DistributionId" Parameter="distributionId" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="ExtDistributionId" Parameter="extDistributionId" Type="System.String" DbType="NVarChar(300)" />
+    <Parameter Name="IsCommit" Parameter="isCommit" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

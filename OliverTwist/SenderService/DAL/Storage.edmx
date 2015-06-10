@@ -1,0 +1,1016 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SenderShedullerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="SenderShedullerModelStoreContainer">
+          <EntitySet Name="CustomFields" EntityType="SenderShedullerModel.Store.CustomFields" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DestinationMap" EntityType="SenderShedullerModel.Store.DestinationMap" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Providers" EntityType="SenderShedullerModel.Store.Providers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SenderNames" EntityType="SenderShedullerModel.Store.SenderNames" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SMSQueue" EntityType="SenderShedullerModel.Store.SMSQueue" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SMSTLV" EntityType="SenderShedullerModel.Store.SMSTLV" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="SenderShedullerModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_DestinationMap2SMSQueue" Association="SenderShedullerModel.Store.FK_DestinationMap2SMSQueue">
+            <End Role="SMSQueue" EntitySet="SMSQueue" />
+            <End Role="DestinationMap" EntitySet="DestinationMap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provider" Association="SenderShedullerModel.Store.FK_Provider">
+            <End Role="Providers" EntitySet="Providers" />
+            <End Role="SenderNames" EntitySet="SenderNames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SenderNames2Users" Association="SenderShedullerModel.Store.FK_SenderNames2Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SenderNames" EntitySet="SenderNames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SMSCustoms" Association="SenderShedullerModel.Store.FK_SMSCustoms">
+            <End Role="SMSQueue" EntitySet="SMSQueue" />
+            <End Role="CustomFields" EntitySet="CustomFields" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SMSProvider" Association="SenderShedullerModel.Store.FK_SMSProvider">
+            <End Role="Providers" EntitySet="Providers" />
+            <End Role="SMSQueue" EntitySet="SMSQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SMSQueue2SenderNames" Association="SenderShedullerModel.Store.FK_SMSQueue2SenderNames">
+            <End Role="SenderNames" EntitySet="SenderNames" />
+            <End Role="SMSQueue" EntitySet="SMSQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SMSQueue2Users" Association="SenderShedullerModel.Store.FK_SMSQueue2Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SMSQueue" EntitySet="SMSQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SMSTLV2SMSQueue" Association="SenderShedullerModel.Store.FK_SMSTLV2SMSQueue">
+            <End Role="SMSQueue" EntitySet="SMSQueue" />
+            <End Role="SMSTLV" EntitySet="SMSTLV" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CustomFields">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SmsId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Key" Type="nvarchar" Nullable="false" MaxLength="300" />
+          <Property Name="Value" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DestinationMap">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SMSId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="dest_addr_ton" Type="smallint" Nullable="false" />
+          <Property Name="dest_addr_npi" Type="smallint" Nullable="false" />
+          <Property Name="destination_addr" Type="varchar" Nullable="false" MaxLength="21" />
+          <Property Name="IsDistributionList" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Providers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Configuration" Type="xml" Nullable="false" />
+          <Property Name="QualityMetrics" Type="real" />
+          <Property Name="ChannelBrandwidth" Type="real" />
+        </EntityType>
+        <EntityType Name="SenderNames">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProviderId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="IsEnabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SMSQueue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SenderNameId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProviderId" Type="uniqueidentifier" />
+          <Property Name="ClientId" Type="nvarchar" MaxLength="200" />
+          <Property Name="DistributionId" Type="nvarchar" MaxLength="200" />
+          <Property Name="SMSId" Type="nvarchar" MaxLength="200" />
+          <Property Name="Status" Type="smallint" Nullable="false" />
+          <Property Name="PSStatus" Type="smallint" />
+          <Property Name="DeliveryTime" Type="datetime" />
+          <Property Name="EuqueueTime" Type="datetime" Nullable="false" />
+          <Property Name="LastSendTime" Type="datetime" />
+          <Property Name="sequence_number" Type="int" Nullable="false" />
+          <Property Name="service_type" Type="varchar" MaxLength="6" />
+          <Property Name="source_addr_ton" Type="smallint" />
+          <Property Name="source_addr_npi" Type="smallint" />
+          <Property Name="source_addr" Type="varchar" MaxLength="21" />
+          <Property Name="number_of_dests" Type="smallint" Nullable="false" />
+          <Property Name="esm_class" Type="smallint" Nullable="false" />
+          <Property Name="protocol_id" Type="smallint" Nullable="false" />
+          <Property Name="priority_flag" Type="smallint" Nullable="false" />
+          <Property Name="schedule_delivery_time" Type="varchar" MaxLength="17" />
+          <Property Name="validity_period" Type="varchar" MaxLength="17" />
+          <Property Name="registered_delivery" Type="smallint" Nullable="false" />
+          <Property Name="replace_if_present_flag" Type="smallint" Nullable="false" />
+          <Property Name="data_coding" Type="smallint" Nullable="false" />
+          <Property Name="sm_default_msg_id" Type="smallint" />
+          <Property Name="sm_length" Type="smallint" Nullable="false" />
+          <Property Name="short_message" Type="varchar" MaxLength="508" />
+          <Property Name="RetryCount" Type="smallint" Nullable="false" />
+          <Property Name="ExtSMSId" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastStatusCheck" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SMSTLV">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SmsId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Tag" Type="smallint" Nullable="false" />
+          <Property Name="Value" Type="varchar" MaxLength="508" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="PassHash" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="IsEnabled" Type="bit" Nullable="false" />
+          <Property Name="CallbackServiceUrl" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_DestinationMap2SMSQueue">
+          <End Role="SMSQueue" Type="SenderShedullerModel.Store.SMSQueue" Multiplicity="1" />
+          <End Role="DestinationMap" Type="SenderShedullerModel.Store.DestinationMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SMSQueue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DestinationMap">
+              <PropertyRef Name="SMSId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provider">
+          <End Role="Providers" Type="SenderShedullerModel.Store.Providers" Multiplicity="1" />
+          <End Role="SenderNames" Type="SenderShedullerModel.Store.SenderNames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Providers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SenderNames">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SenderNames2Users">
+          <End Role="Users" Type="SenderShedullerModel.Store.Users" Multiplicity="1" />
+          <End Role="SenderNames" Type="SenderShedullerModel.Store.SenderNames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SenderNames">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SMSCustoms">
+          <End Role="SMSQueue" Type="SenderShedullerModel.Store.SMSQueue" Multiplicity="1" />
+          <End Role="CustomFields" Type="SenderShedullerModel.Store.CustomFields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SMSQueue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomFields">
+              <PropertyRef Name="SmsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SMSProvider">
+          <End Role="Providers" Type="SenderShedullerModel.Store.Providers" Multiplicity="0..1" />
+          <End Role="SMSQueue" Type="SenderShedullerModel.Store.SMSQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Providers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SMSQueue">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SMSQueue2SenderNames">
+          <End Role="SenderNames" Type="SenderShedullerModel.Store.SenderNames" Multiplicity="1" />
+          <End Role="SMSQueue" Type="SenderShedullerModel.Store.SMSQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SenderNames">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SMSQueue">
+              <PropertyRef Name="SenderNameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SMSQueue2Users">
+          <End Role="Users" Type="SenderShedullerModel.Store.Users" Multiplicity="1" />
+          <End Role="SMSQueue" Type="SenderShedullerModel.Store.SMSQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SMSQueue">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SMSTLV2SMSQueue">
+          <End Role="SMSQueue" Type="SenderShedullerModel.Store.SMSQueue" Multiplicity="1" />
+          <End Role="SMSTLV" Type="SenderShedullerModel.Store.SMSTLV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SMSQueue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SMSTLV">
+              <PropertyRef Name="SmsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CreateSenderName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="ProviderId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="SenderName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DisableSenderName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SenderNameId" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="EnqueueSMS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="SenderNameId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="ProviderId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="ClientId" Type="nvarchar" Mode="In" />
+          <Parameter Name="DistributionId" Type="nvarchar" Mode="In" />
+          <Parameter Name="ExtSMSId" Type="nvarchar" Mode="In" />
+          <Parameter Name="sequence_number" Type="smallint" Mode="In" />
+          <Parameter Name="service_type" Type="varchar" Mode="In" />
+          <Parameter Name="source_addr_ton" Type="smallint" Mode="In" />
+          <Parameter Name="source_addr_npi" Type="smallint" Mode="In" />
+          <Parameter Name="source_addr" Type="varchar" Mode="In" />
+          <Parameter Name="number_of_dests" Type="smallint" Mode="In" />
+          <Parameter Name="esm_class" Type="smallint" Mode="In" />
+          <Parameter Name="protocol_id" Type="smallint" Mode="In" />
+          <Parameter Name="priority_flag" Type="smallint" Mode="In" />
+          <Parameter Name="schedule_delivery_time" Type="varchar" Mode="In" />
+          <Parameter Name="validity_period" Type="varchar" Mode="In" />
+          <Parameter Name="registered_delivery" Type="smallint" Mode="In" />
+          <Parameter Name="replace_if_present_flag" Type="smallint" Mode="In" />
+          <Parameter Name="data_coding" Type="smallint" Mode="In" />
+          <Parameter Name="sm_default_msg_id" Type="smallint" Mode="In" />
+          <Parameter Name="sm_length" Type="smallint" Mode="In" />
+          <Parameter Name="short_message" Type="varchar" Mode="In" />
+          <Parameter Name="TLVTable" Type="xml" Mode="In" />
+          <Parameter Name="Destanations" Type="xml" Mode="In" />
+          <Parameter Name="CustomParameters" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetProvider" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProviderId" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="GetProviders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="GetSenderNames" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="GetSMSCountInStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="Status" Type="smallint" Mode="In" />
+          <Parameter Name="ClientId" Type="nvarchar" Mode="In" />
+          <Parameter Name="DistributionId" Type="nvarchar" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="CustomsLimits" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetSMSDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="ClientId" Type="nvarchar" Mode="In" />
+          <Parameter Name="DistributionId" Type="nvarchar" Mode="In" />
+          <Parameter Name="ExtSmsId" Type="nvarchar" Mode="In" />
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="RowsPerPage" Type="bigint" Mode="In" />
+          <Parameter Name="PageNumber" Type="bigint" Mode="In" />
+          <Parameter Name="CustomsLimits" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetSMSForCancel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientId" Type="nvarchar" Mode="In" />
+          <Parameter Name="DistributionId" Type="nvarchar" Mode="In" />
+          <Parameter Name="ExtSmsId" Type="nvarchar" Mode="In" />
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="GetSMSParams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="GetSMSStatuses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="ClientId" Type="nvarchar" Mode="In" />
+          <Parameter Name="DistributionId" Type="nvarchar" Mode="In" />
+          <Parameter Name="ExtSmsId" Type="nvarchar" Mode="In" />
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="RowsPerPage" Type="bigint" Mode="In" />
+          <Parameter Name="PageNumber" Type="bigint" Mode="In" />
+          <Parameter Name="CustomsLimits" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetSMSToSend" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Count" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="GetSMSToUpdateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Count" Type="bigint" Mode="In" />
+          <Parameter Name="CheckPeriod" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetStringHash" ReturnType="nvarchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SourceString" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="GetUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Login" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="SaveUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Login" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="IsEnabled" Type="bit" Mode="In" />
+          <Parameter Name="CallbackServiceUrl" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="SetProviderMetrics" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProviderId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="QualityMetrics" Type="real" Mode="In" />
+          <Parameter Name="ChannelBrandwidth" Type="real" Mode="In" />
+        </Function>
+        <Function Name="UpdateSMSStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="SmsId" Type="nvarchar" Mode="In" />
+          <Parameter Name="Status" Type="smallint" Mode="In" />
+          <Parameter Name="ProviderId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="ProviderStatus" Type="smallint" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SenderShedullerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="SenderShedullerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DestinationMap" EntityType="SenderShedullerModel.DestinationMap" />
+          <EntitySet Name="Providers" EntityType="SenderShedullerModel.Providers" />
+          <EntitySet Name="SenderNames" EntityType="SenderShedullerModel.SenderNames" />
+          <EntitySet Name="SMSQueue" EntityType="SenderShedullerModel.SMSQueue" />
+          <EntitySet Name="SMSTLV" EntityType="SenderShedullerModel.SMSTLV" />
+          <EntitySet Name="Users" EntityType="SenderShedullerModel.Users" />
+          <AssociationSet Name="FK_DestinationMap2SMSQueue" Association="SenderShedullerModel.FK_DestinationMap2SMSQueue">
+            <End Role="SMSQueue" EntitySet="SMSQueue" />
+            <End Role="DestinationMap" EntitySet="DestinationMap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provider" Association="SenderShedullerModel.FK_Provider">
+            <End Role="Providers" EntitySet="Providers" />
+            <End Role="SenderNames" EntitySet="SenderNames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SMSProvider" Association="SenderShedullerModel.FK_SMSProvider">
+            <End Role="Providers" EntitySet="Providers" />
+            <End Role="SMSQueue" EntitySet="SMSQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SenderNames2Users" Association="SenderShedullerModel.FK_SenderNames2Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SenderNames" EntitySet="SenderNames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SMSQueue2SenderNames" Association="SenderShedullerModel.FK_SMSQueue2SenderNames">
+            <End Role="SenderNames" EntitySet="SenderNames" />
+            <End Role="SMSQueue" EntitySet="SMSQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SMSQueue2Users" Association="SenderShedullerModel.FK_SMSQueue2Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SMSQueue" EntitySet="SMSQueue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SMSTLV2SMSQueue" Association="SenderShedullerModel.FK_SMSTLV2SMSQueue">
+            <End Role="SMSQueue" EntitySet="SMSQueue" />
+            <End Role="SMSTLV" EntitySet="SMSTLV" />
+          </AssociationSet>
+          <FunctionImport Name="CreateSenderName" ReturnType="Collection(Guid)">
+            <Parameter Name="UserId" Mode="In" Type="Guid" />
+            <Parameter Name="ProviderId" Mode="In" Type="Guid" />
+            <Parameter Name="SenderName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EnqueueSMS" ReturnType="Collection(Guid)">
+            <Parameter Name="UserId" Mode="In" Type="Guid" />
+            <Parameter Name="SenderNameId" Mode="In" Type="Guid" />
+            <Parameter Name="ProviderId" Mode="In" Type="Guid" />
+            <Parameter Name="ClientId" Mode="In" Type="String" />
+            <Parameter Name="DistributionId" Mode="In" Type="String" />
+            <Parameter Name="ExtSMSId" Mode="In" Type="String" />
+            <Parameter Name="sequence_number" Mode="In" Type="Int16" />
+            <Parameter Name="service_type" Mode="In" Type="String" />
+            <Parameter Name="source_addr_ton" Mode="In" Type="Int16" />
+            <Parameter Name="source_addr_npi" Mode="In" Type="Int16" />
+            <Parameter Name="source_addr" Mode="In" Type="String" />
+            <Parameter Name="number_of_dests" Mode="In" Type="Int16" />
+            <Parameter Name="esm_class" Mode="In" Type="Int16" />
+            <Parameter Name="protocol_id" Mode="In" Type="Int16" />
+            <Parameter Name="priority_flag" Mode="In" Type="Int16" />
+            <Parameter Name="schedule_delivery_time" Mode="In" Type="String" />
+            <Parameter Name="validity_period" Mode="In" Type="String" />
+            <Parameter Name="registered_delivery" Mode="In" Type="Int16" />
+            <Parameter Name="replace_if_present_flag" Mode="In" Type="Int16" />
+            <Parameter Name="data_coding" Mode="In" Type="Int16" />
+            <Parameter Name="sm_default_msg_id" Mode="In" Type="Int16" />
+            <Parameter Name="sm_length" Mode="In" Type="Int16" />
+            <Parameter Name="short_message" Mode="In" Type="String" />
+            <Parameter Name="TLVTable" Mode="In" Type="String" />
+            <Parameter Name="Destanations" Mode="In" Type="String" />
+            <Parameter Name="CustomParameters" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetProvider" EntitySet="Providers" ReturnType="Collection(SenderShedullerModel.Providers)">
+          <Parameter Name="ProviderId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="GetProviders" ReturnType="Collection(SenderShedullerModel.IdNameList)">
+          <Parameter Name="UserId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="GetSenderNames" EntitySet="SenderNames" ReturnType="Collection(SenderShedullerModel.SenderNames)">
+          <Parameter Name="UserId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="GetSMSCountInStatus" ReturnType="Collection(SenderShedullerModel.SMSQuantity)">
+            <Parameter Name="UserId" Mode="In" Type="Guid" />
+            <Parameter Name="Status" Mode="In" Type="Int16" />
+            <Parameter Name="ClientId" Mode="In" Type="String" />
+            <Parameter Name="DistributionId" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CustomsLimits" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetSMSForCancel" ReturnType="Collection(SenderShedullerModel.SmsStatusMapping)">
+            <Parameter Name="ClientId" Mode="In" Type="String" />
+            <Parameter Name="DistributionId" Mode="In" Type="String" />
+            <Parameter Name="ExtSmsId" Mode="In" Type="String" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="GetSMSStatuses" ReturnType="Collection(SenderShedullerModel.SmsExtendedStatusMapping)">
+            <Parameter Name="UserId" Mode="In" Type="Guid" />
+            <Parameter Name="ClientId" Mode="In" Type="String" />
+            <Parameter Name="DistributionId" Mode="In" Type="String" />
+            <Parameter Name="ExtSmsId" Mode="In" Type="String" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="RowsPerPage" Mode="In" Type="Int64" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int64" />
+            <Parameter Name="CustomsLimits" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetSMSToSend" EntitySet="SMSQueue" ReturnType="Collection(SenderShedullerModel.SMSQueue)">
+          <Parameter Name="Count" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetSMSToUpdateStatus" EntitySet="SMSQueue" ReturnType="Collection(SenderShedullerModel.SMSQueue)">
+            <Parameter Name="Count" Mode="In" Type="Int64" />
+            <Parameter Name="CheckPeriod" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetUser" ReturnType="Collection(Guid)">
+            <Parameter Name="Login" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SaveUser" ReturnType="Collection(Guid)">
+            <Parameter Name="Login" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="IsEnabled" Mode="In" Type="Boolean" />
+            <Parameter Name="CallbackServiceUrl" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SetProviderMetrics">
+            <Parameter Name="ProviderId" Mode="In" Type="Guid" />
+            <Parameter Name="QualityMetrics" Mode="In" Type="Single" />
+            <Parameter Name="ChannelBrandwidth" Mode="In" Type="Single" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateSMSStatus" ReturnType="Collection(SenderShedullerModel.SMSShortInfo)">
+            <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="SmsId" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="Int16" />
+            <Parameter Name="ProviderId" Mode="In" Type="Guid" />
+            <Parameter Name="ProviderStatus" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="GetSMSDetails" ReturnType="Collection(SenderShedullerModel.SMSDetails)">
+            <Parameter Name="UserId" Mode="In" Type="Guid" />
+            <Parameter Name="ClientId" Mode="In" Type="String" />
+            <Parameter Name="DistributionId" Mode="In" Type="String" />
+            <Parameter Name="ExtSmsId" Mode="In" Type="String" />
+            <Parameter Name="Id" Mode="In" Type="Guid" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="RowsPerPage" Mode="In" Type="Int64" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int64" />
+            <Parameter Name="CustomsLimits" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="CustomFields" EntityType="SenderShedullerModel.CustomFields" />
+          <AssociationSet Name="FK_SMSCustoms" Association="SenderShedullerModel.FK_SMSCustoms">
+            <End Role="SMSQueue" EntitySet="SMSQueue" />
+            <End Role="CustomFields" EntitySet="CustomFields" />
+          </AssociationSet>
+          <FunctionImport Name="GetSMSParams" ReturnType="Collection(SenderShedullerModel.SMSParam)">
+          <Parameter Name="Id" Mode="In" Type="Guid" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="DestinationMap">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SMSId" Type="Guid" Nullable="false" />
+          <Property Name="dest_addr_ton" Type="Int16" Nullable="false" />
+          <Property Name="dest_addr_npi" Type="Int16" Nullable="false" />
+          <Property Name="destination_addr" Type="String" Nullable="false" MaxLength="21" Unicode="false" FixedLength="false" />
+          <Property Name="IsDistributionList" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SMSQueue" Relationship="SenderShedullerModel.FK_DestinationMap2SMSQueue" FromRole="DestinationMap" ToRole="SMSQueue" />
+        </EntityType>
+        <EntityType Name="Providers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Configuration" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="QualityMetrics" Type="Single" />
+          <Property Name="ChannelBrandwidth" Type="Single" />
+          <NavigationProperty Name="SenderNames" Relationship="SenderShedullerModel.FK_Provider" FromRole="Providers" ToRole="SenderNames" />
+          <NavigationProperty Name="SMSQueue" Relationship="SenderShedullerModel.FK_SMSProvider" FromRole="Providers" ToRole="SMSQueue" />
+        </EntityType>
+        <EntityType Name="SenderNames">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="ProviderId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Providers" Relationship="SenderShedullerModel.FK_Provider" FromRole="SenderNames" ToRole="Providers" />
+          <NavigationProperty Name="Users" Relationship="SenderShedullerModel.FK_SenderNames2Users" FromRole="SenderNames" ToRole="Users" />
+          <NavigationProperty Name="SMSQueue" Relationship="SenderShedullerModel.FK_SMSQueue2SenderNames" FromRole="SenderNames" ToRole="SMSQueue" />
+        </EntityType>
+        <EntityType Name="SMSQueue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="SenderNameId" Type="Guid" Nullable="false" />
+          <Property Name="ProviderId" Type="Guid" />
+          <Property Name="ClientId" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="DistributionId" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="SMSId" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Status" Type="Int16" Nullable="false" />
+          <Property Name="PSStatus" Type="Int16" />
+          <Property Name="DeliveryTime" Type="DateTime" />
+          <Property Name="EuqueueTime" Type="DateTime" Nullable="false" />
+          <Property Name="LastSendTime" Type="DateTime" />
+          <Property Name="sequence_number" Type="Int32" Nullable="false" />
+          <Property Name="service_type" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+          <Property Name="source_addr_ton" Type="Int16" />
+          <Property Name="source_addr_npi" Type="Int16" />
+          <Property Name="source_addr" Type="String" MaxLength="21" Unicode="false" FixedLength="false" />
+          <Property Name="number_of_dests" Type="Int16" Nullable="false" />
+          <Property Name="esm_class" Type="Int16" Nullable="false" />
+          <Property Name="protocol_id" Type="Int16" Nullable="false" />
+          <Property Name="priority_flag" Type="Int16" Nullable="false" />
+          <Property Name="schedule_delivery_time" Type="String" MaxLength="17" Unicode="false" FixedLength="false" />
+          <Property Name="validity_period" Type="String" MaxLength="17" Unicode="false" FixedLength="false" />
+          <Property Name="registered_delivery" Type="Int16" Nullable="false" />
+          <Property Name="replace_if_present_flag" Type="Int16" Nullable="false" />
+          <Property Name="data_coding" Type="Int16" Nullable="false" />
+          <Property Name="sm_default_msg_id" Type="Int16" />
+          <Property Name="sm_length" Type="Int16" Nullable="false" />
+          <Property Name="short_message" Type="String" Nullable="false" MaxLength="508" Unicode="false" FixedLength="false" />
+          <Property Name="RetryCount" Type="Int16" Nullable="false" />
+          <Property Name="ExtSMSId" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="DestinationMap" Relationship="SenderShedullerModel.FK_DestinationMap2SMSQueue" FromRole="SMSQueue" ToRole="DestinationMap" />
+          <NavigationProperty Name="Providers" Relationship="SenderShedullerModel.FK_SMSProvider" FromRole="SMSQueue" ToRole="Providers" />
+          <NavigationProperty Name="SenderNames" Relationship="SenderShedullerModel.FK_SMSQueue2SenderNames" FromRole="SMSQueue" ToRole="SenderNames" />
+          <NavigationProperty Name="Users" Relationship="SenderShedullerModel.FK_SMSQueue2Users" FromRole="SMSQueue" ToRole="Users" />
+          <NavigationProperty Name="SMSTLV" Relationship="SenderShedullerModel.FK_SMSTLV2SMSQueue" FromRole="SMSQueue" ToRole="SMSTLV" />
+          <Property Type="DateTime" Name="LastStatusCheck" Nullable="false" />
+          <NavigationProperty Name="CustomFields" Relationship="SenderShedullerModel.FK_SMSCustoms" FromRole="SMSQueue" ToRole="CustomFields" />
+        </EntityType>
+        <EntityType Name="SMSTLV">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SmsId" Type="Guid" Nullable="false" />
+          <Property Name="Tag" Type="Int16" Nullable="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="508" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="SMSQueue" Relationship="SenderShedullerModel.FK_SMSTLV2SMSQueue" FromRole="SMSTLV" ToRole="SMSQueue" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="PassHash" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SenderNames" Relationship="SenderShedullerModel.FK_SenderNames2Users" FromRole="Users" ToRole="SenderNames" />
+          <NavigationProperty Name="SMSQueue" Relationship="SenderShedullerModel.FK_SMSQueue2Users" FromRole="Users" ToRole="SMSQueue" />
+          <Property Type="String" Name="CallbackServiceUrl" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_DestinationMap2SMSQueue">
+          <End Role="SMSQueue" Type="SenderShedullerModel.SMSQueue" Multiplicity="1" />
+          <End Role="DestinationMap" Type="SenderShedullerModel.DestinationMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SMSQueue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DestinationMap">
+              <PropertyRef Name="SMSId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provider">
+          <End Role="Providers" Type="SenderShedullerModel.Providers" Multiplicity="1" />
+          <End Role="SenderNames" Type="SenderShedullerModel.SenderNames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Providers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SenderNames">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SMSProvider">
+          <End Role="Providers" Type="SenderShedullerModel.Providers" Multiplicity="0..1" />
+          <End Role="SMSQueue" Type="SenderShedullerModel.SMSQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Providers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SMSQueue">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SenderNames2Users">
+          <End Role="Users" Type="SenderShedullerModel.Users" Multiplicity="1" />
+          <End Role="SenderNames" Type="SenderShedullerModel.SenderNames" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SenderNames">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SMSQueue2SenderNames">
+          <End Role="SenderNames" Type="SenderShedullerModel.SenderNames" Multiplicity="1" />
+          <End Role="SMSQueue" Type="SenderShedullerModel.SMSQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SenderNames">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SMSQueue">
+              <PropertyRef Name="SenderNameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SMSQueue2Users">
+          <End Role="Users" Type="SenderShedullerModel.Users" Multiplicity="1" />
+          <End Role="SMSQueue" Type="SenderShedullerModel.SMSQueue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SMSQueue">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SMSTLV2SMSQueue">
+          <End Role="SMSQueue" Type="SenderShedullerModel.SMSQueue" Multiplicity="1" />
+          <End Role="SMSTLV" Type="SenderShedullerModel.SMSTLV" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SMSQueue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SMSTLV">
+              <PropertyRef Name="SmsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="IdNameList">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="SmsStatusMapping">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="SMSId" Nullable="true" MaxLength="200" />
+          <Property Type="Int16" Name="Status" Nullable="false" />
+          <Property Type="Guid" Name="ProviderId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SmsExtendedStatusMapping">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="ExtSMSId" Nullable="true" MaxLength="200" />
+          <Property Type="Int16" Name="Status" Nullable="false" />
+          <Property Type="Guid" Name="ProviderId" Nullable="true" />
+          <Property Type="Int16" Name="PSStatus" Nullable="true" />
+          <Property Type="DateTime" Name="LastStatusCheck" Nullable="false" Precision="23" />
+          <Property Type="Int64" Name="Row" Nullable="true" />
+          <Property Type="Int32" Name="Records" Nullable="true" />
+          <Property Type="DateTime" Name="EuqueueTime" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="SMSDetails">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="ExtSMSId" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="short_message" Nullable="true" MaxLength="508" />
+          <Property Type="String" Name="destination_addr" Nullable="false" MaxLength="21" />
+          <Property Type="Int16" Name="Status" Nullable="false" />
+          <Property Type="Guid" Name="ProviderId" Nullable="true" />
+          <Property Type="Int16" Name="PSStatus" Nullable="true" />
+          <Property Type="DateTime" Name="LastStatusCheck" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="EuqueueTime" Nullable="false" Precision="23" />
+          <Property Type="Int16" Name="data_coding" Nullable="false" />
+          <Property Type="String" Name="source_addr" Nullable="true" MaxLength="21" />
+          <Property Type="Int64" Name="Row" Nullable="true" />
+          <Property Type="Int32" Name="Records" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SMSQuantity">
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="Int16" Name="Status" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="CustomFields">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Guid" Name="SmsId" Nullable="false" />
+          <Property Type="String" Name="Key" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Value" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SMSQueue" Relationship="SenderShedullerModel.FK_SMSCustoms" FromRole="CustomFields" ToRole="SMSQueue" />
+        </EntityType>
+        <Association Name="FK_SMSCustoms">
+          <End Type="SenderShedullerModel.SMSQueue" Role="SMSQueue" Multiplicity="1" />
+          <End Type="SenderShedullerModel.CustomFields" Role="CustomFields" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SMSQueue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CustomFields">
+              <PropertyRef Name="SmsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SMSParam">
+          <Property Type="String" Name="Key" Nullable="false" MaxLength="300" />
+          <Property Type="String" Name="Value" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SMSShortInfo">
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="ClientId" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="DistributionId" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CallbackServiceUrl" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SenderShedullerModelStoreContainer" CdmEntityContainer="SenderShedullerEntities">
+          <EntitySetMapping Name="DestinationMap"><EntityTypeMapping TypeName="SenderShedullerModel.DestinationMap"><MappingFragment StoreEntitySet="DestinationMap">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="SMSId" ColumnName="SMSId" />
+            <ScalarProperty Name="dest_addr_ton" ColumnName="dest_addr_ton" />
+            <ScalarProperty Name="dest_addr_npi" ColumnName="dest_addr_npi" />
+            <ScalarProperty Name="destination_addr" ColumnName="destination_addr" />
+            <ScalarProperty Name="IsDistributionList" ColumnName="IsDistributionList" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Providers"><EntityTypeMapping TypeName="SenderShedullerModel.Providers"><MappingFragment StoreEntitySet="Providers">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Configuration" ColumnName="Configuration" />
+            <ScalarProperty Name="QualityMetrics" ColumnName="QualityMetrics" />
+            <ScalarProperty Name="ChannelBrandwidth" ColumnName="ChannelBrandwidth" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SenderNames"><EntityTypeMapping TypeName="SenderShedullerModel.SenderNames"><MappingFragment StoreEntitySet="SenderNames">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="UserId" ColumnName="UserId" />
+            <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SMSQueue"><EntityTypeMapping TypeName="SenderShedullerModel.SMSQueue"><MappingFragment StoreEntitySet="SMSQueue">
+            <ScalarProperty Name="LastStatusCheck" ColumnName="LastStatusCheck" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="UserId" ColumnName="UserId" />
+            <ScalarProperty Name="SenderNameId" ColumnName="SenderNameId" />
+            <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+            <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+            <ScalarProperty Name="DistributionId" ColumnName="DistributionId" />
+            <ScalarProperty Name="SMSId" ColumnName="SMSId" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+            <ScalarProperty Name="PSStatus" ColumnName="PSStatus" />
+            <ScalarProperty Name="DeliveryTime" ColumnName="DeliveryTime" />
+            <ScalarProperty Name="EuqueueTime" ColumnName="EuqueueTime" />
+            <ScalarProperty Name="LastSendTime" ColumnName="LastSendTime" />
+            <ScalarProperty Name="sequence_number" ColumnName="sequence_number" />
+            <ScalarProperty Name="service_type" ColumnName="service_type" />
+            <ScalarProperty Name="source_addr_ton" ColumnName="source_addr_ton" />
+            <ScalarProperty Name="source_addr_npi" ColumnName="source_addr_npi" />
+            <ScalarProperty Name="source_addr" ColumnName="source_addr" />
+            <ScalarProperty Name="number_of_dests" ColumnName="number_of_dests" />
+            <ScalarProperty Name="esm_class" ColumnName="esm_class" />
+            <ScalarProperty Name="protocol_id" ColumnName="protocol_id" />
+            <ScalarProperty Name="priority_flag" ColumnName="priority_flag" />
+            <ScalarProperty Name="schedule_delivery_time" ColumnName="schedule_delivery_time" />
+            <ScalarProperty Name="validity_period" ColumnName="validity_period" />
+            <ScalarProperty Name="registered_delivery" ColumnName="registered_delivery" />
+            <ScalarProperty Name="replace_if_present_flag" ColumnName="replace_if_present_flag" />
+            <ScalarProperty Name="data_coding" ColumnName="data_coding" />
+            <ScalarProperty Name="sm_default_msg_id" ColumnName="sm_default_msg_id" />
+            <ScalarProperty Name="sm_length" ColumnName="sm_length" />
+            <ScalarProperty Name="short_message" ColumnName="short_message" />
+            <ScalarProperty Name="RetryCount" ColumnName="RetryCount" />
+            <ScalarProperty Name="ExtSMSId" ColumnName="ExtSMSId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SMSTLV"><EntityTypeMapping TypeName="SenderShedullerModel.SMSTLV"><MappingFragment StoreEntitySet="SMSTLV">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="SmsId" ColumnName="SmsId" />
+            <ScalarProperty Name="Tag" ColumnName="Tag" />
+            <ScalarProperty Name="Value" ColumnName="Value" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Users"><EntityTypeMapping TypeName="SenderShedullerModel.Users"><MappingFragment StoreEntitySet="Users">
+            <ScalarProperty Name="CallbackServiceUrl" ColumnName="CallbackServiceUrl" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Login" ColumnName="Login" />
+            <ScalarProperty Name="PassHash" ColumnName="PassHash" />
+            <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CreateSenderName" FunctionName="SenderShedullerModel.Store.CreateSenderName" />
+          <FunctionImportMapping FunctionImportName="EnqueueSMS" FunctionName="SenderShedullerModel.Store.EnqueueSMS" />
+          <FunctionImportMapping FunctionImportName="GetProvider" FunctionName="SenderShedullerModel.Store.GetProvider" />
+          <FunctionImportMapping FunctionImportName="GetProviders" FunctionName="SenderShedullerModel.Store.GetProviders">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SenderShedullerModel.IdNameList">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSenderNames" FunctionName="SenderShedullerModel.Store.GetSenderNames" />
+          <FunctionImportMapping FunctionImportName="GetSMSCountInStatus" FunctionName="SenderShedullerModel.Store.GetSMSCountInStatus" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SenderShedullerModel.SMSQuantity">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSMSForCancel" FunctionName="SenderShedullerModel.Store.GetSMSForCancel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SenderShedullerModel.SmsStatusMapping">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SMSId" ColumnName="SMSId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSMSStatuses" FunctionName="SenderShedullerModel.Store.GetSMSStatuses">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SenderShedullerModel.SmsExtendedStatusMapping">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ExtSMSId" ColumnName="ExtSMSId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+                <ScalarProperty Name="PSStatus" ColumnName="PSStatus" />
+                <ScalarProperty Name="LastStatusCheck" ColumnName="LastStatusCheck" />
+                <ScalarProperty Name="Row" ColumnName="Row" />
+                <ScalarProperty Name="Records" ColumnName="Records" />
+                <ScalarProperty Name="EuqueueTime" ColumnName="EuqueueTime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSMSToSend" FunctionName="SenderShedullerModel.Store.GetSMSToSend" />
+          <FunctionImportMapping FunctionImportName="GetSMSToUpdateStatus" FunctionName="SenderShedullerModel.Store.GetSMSToUpdateStatus" />
+          <FunctionImportMapping FunctionImportName="GetUser" FunctionName="SenderShedullerModel.Store.GetUser" />
+          <FunctionImportMapping FunctionImportName="SaveUser" FunctionName="SenderShedullerModel.Store.SaveUser" />
+          <FunctionImportMapping FunctionImportName="SetProviderMetrics" FunctionName="SenderShedullerModel.Store.SetProviderMetrics" />
+          <FunctionImportMapping FunctionImportName="UpdateSMSStatus" FunctionName="SenderShedullerModel.Store.UpdateSMSStatus" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SenderShedullerModel.SMSShortInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="DistributionId" ColumnName="DistributionId" />
+                <ScalarProperty Name="CallbackServiceUrl" ColumnName="CallbackServiceUrl" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSMSDetails" FunctionName="SenderShedullerModel.Store.GetSMSDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SenderShedullerModel.SMSDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ExtSMSId" ColumnName="ExtSMSId" />
+                <ScalarProperty Name="short_message" ColumnName="short_message" />
+                <ScalarProperty Name="destination_addr" ColumnName="destination_addr" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+                <ScalarProperty Name="PSStatus" ColumnName="PSStatus" />
+                <ScalarProperty Name="LastStatusCheck" ColumnName="LastStatusCheck" />
+                <ScalarProperty Name="EuqueueTime" ColumnName="EuqueueTime" />
+                <ScalarProperty Name="data_coding" ColumnName="data_coding" />
+                <ScalarProperty Name="source_addr" ColumnName="source_addr" />
+                <ScalarProperty Name="Row" ColumnName="Row" />
+                <ScalarProperty Name="Records" ColumnName="Records" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="CustomFields">
+            <EntityTypeMapping TypeName="SenderShedullerModel.CustomFields">
+              <MappingFragment StoreEntitySet="CustomFields">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="SmsId" ColumnName="SmsId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetSMSParams" FunctionName="SenderShedullerModel.Store.GetSMSParams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SenderShedullerModel.SMSParam">
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Storage">
+        <EntityTypeShape EntityType="SenderShedullerModel.DestinationMap" Width="1.5" PointX="7.5" PointY="3.375" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="SenderShedullerModel.Providers" Width="1.5" PointX="0.75" PointY="0.75" Height="2.3648893229166656" IsExpanded="true" />
+        <EntityTypeShape EntityType="SenderShedullerModel.SenderNames" Width="1.5" PointX="3" PointY="4.625" Height="2.5571907552083335" IsExpanded="true" />
+        <EntityTypeShape EntityType="SenderShedullerModel.SMSQueue" Width="1.5" PointX="5.25" PointY="2" Height="7.9416308593749978" IsExpanded="true" />
+        <EntityTypeShape EntityType="SenderShedullerModel.SMSTLV" Width="1.5" PointX="7.5" PointY="6.5" Height="1.9802864583333344" IsExpanded="true" />
+        <EntityTypeShape EntityType="SenderShedullerModel.Users" Width="1.5" PointX="0.75" PointY="4.875" Height="2.1725878906249996" IsExpanded="true" />
+        <AssociationConnector Association="SenderShedullerModel.FK_DestinationMap2SMSQueue" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="4.5574446614583337" />
+          <ConnectorPoint PointX="7.5" PointY="4.5574446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="SenderShedullerModel.FK_Provider" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="1.9324446614583328" />
+          <ConnectorPoint PointX="3.75" PointY="1.9324446614583328" />
+          <ConnectorPoint PointX="3.75" PointY="4.625" />
+        </AssociationConnector>
+        <AssociationConnector Association="SenderShedullerModel.FK_SMSProvider" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.5574446614583328" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="2.5574446614583324" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="2.5574446614583328" />
+          <ConnectorPoint PointX="5.25" PointY="2.5574446614583328" />
+        </AssociationConnector>
+        <AssociationConnector Association="SenderShedullerModel.FK_SenderNames2Users" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="5.9612939453125" />
+          <ConnectorPoint PointX="3" PointY="5.9612939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="SenderShedullerModel.FK_SMSQueue2SenderNames" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="5.9035953776041667" />
+          <ConnectorPoint PointX="5.25" PointY="5.9035953776041667" />
+        </AssociationConnector>
+        <AssociationConnector Association="SenderShedullerModel.FK_SMSQueue2Users" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="7.047587890625" />
+          <ConnectorPoint PointX="1.5" PointY="8.7854622395833335" />
+          <ConnectorPoint PointX="5.25" PointY="8.7854622395833335" />
+        </AssociationConnector>
+        <AssociationConnector Association="SenderShedullerModel.FK_SMSTLV2SMSQueue" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="7.4901432291666676" />
+          <ConnectorPoint PointX="7.5" PointY="7.4901432291666676" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SenderShedullerModel.CustomFields" Width="1.5" PointX="7.5" PointY="10.125" Height="1.9802864583333317" />
+        <AssociationConnector Association="SenderShedullerModel.FK_SMSCustoms" >
+          <ConnectorPoint PointX="6" PointY="10.326233723958334" />
+          <ConnectorPoint PointX="6" PointY="11.215760591145832" />
+          <ConnectorPoint PointX="7.5" PointY="11.215760591145832" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

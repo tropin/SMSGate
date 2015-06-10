@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<response method="CheckSMSFull">
+  <sms id="1267199920544064825" state_id="deliver" state_update="03.09.2007 21:07:51"/>
+  <sms id="1267199920544064825" state_id="not_deliver" state_update="03.09.2007 21:07:51"/>
+</response>

@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Csharper.OliverTwist.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="GateUserName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Admin</Value>
+    </Setting>
+    <Setting Name="GatePassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">colonel</Value>
+    </Setting>
+    <Setting Name="SessionsTTL" Type="System.TimeSpan" Scope="Application">
+      <Value Profile="(Default)">00:30:00</Value>
+    </Setting>
+    <Setting Name="DefaultSenderName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Development</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="ftp://195.128.121.187/kotlyarav-8/WWWRoot/" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Sender Service" publishMethod="FTP" replaceMatchingFiles="True" userName="kotlyarav-3" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAt2t/y4oTAk20aXyAeTl5IQAAAAACAAAAAAAQZgAAAAEAACAAAACSklPNdaJGY5OC8eLdkiBYGZY6LquxuprOjvfpmbTvkwAAAAAOgAAAAAIAACAAAAB03eD650Dm1Cq2wS7d9/fcnVK79uHPwUbCrYcdWQBC4iAAAAB9piuUQ7YSm2ZfiQkjiZcMWgP3SungRYA2xjEkhWLLvkAAAADcHlRUQPex7tILhmVuBs5ssbaq7PcfFeNCehz4U0DGnQZv3098EtdRnbaTGdacBia+a0kGswhUUlttC5R7BRpp" SelectedForPublish="True">
+    <file relUrl="bin/Csharper.SenderService.pdb" publishTime="04/25/2011 17:27:53" />
+    <file relUrl="bin/Csharper.SenderService.dll" publishTime="04/25/2011 17:27:54" />
+    <file relUrl="bin/RoaminSMPP.pdb" publishTime="04/25/2011 17:27:51" />
+    <file relUrl="bin/CSharper.SenderServiceFacade.pdb" publishTime="04/25/2011 17:27:57" />
+    <file relUrl="bin/MvcContrib.dll" publishTime="09/25/2010 15:09:10" />
+    <file relUrl="Web.config" publishTime="04/25/2011 17:28:21" />
+    <file relUrl="bin/CSharper.SenderServiceFacade.dll" publishTime="04/25/2011 17:27:57" />
+    <file relUrl="bin/Csharper.Common.dll" publishTime="04/25/2011 17:27:50" />
+    <file relUrl="bin/Csharper.Common.pdb" publishTime="04/25/2011 17:27:49" />
+    <file relUrl="ADEService.svc" publishTime="03/23/2011 23:56:49" />
+    <file relUrl="bin/UnidecodeSharp.dll" publishTime="08/25/2010 12:37:25" />
+    <file relUrl="bin/RoaminSMPP.dll" publishTime="04/25/2011 17:27:51" />
+  </publishProfile>
+</publishData>
